@@ -1,0 +1,322 @@
+@import 'tailwindcss';
+
+@source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
+@source '../../storage/framework/views/*.php';
+@source '../views/**/*.blade.php';
+
+@theme {
+    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+        'Segoe UI Symbol', 'Noto Color Emoji';
+
+    /* Brand palette — deep space fintech */
+    --color-ink: oklch(0.16 0.03 265);
+    --color-ink-900: oklch(0.13 0.03 265);
+    --color-ink-950: oklch(0.09 0.025 265);
+    --color-brand: oklch(0.72 0.17 250);
+    --color-brand-bright: oklch(0.78 0.18 235);
+    --color-violet: oklch(0.68 0.21 295);
+    --color-emerald: oklch(0.78 0.18 165);
+    --color-gold: oklch(0.82 0.16 85);
+
+    /* Custom animations */
+    --animate-float: float 6s ease-in-out infinite;
+    --animate-float-slow: float 9s ease-in-out infinite;
+    --animate-spin-slow: spin 18s linear infinite;
+    --animate-shimmer: shimmer 2.5s linear infinite;
+    --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+    --animate-marquee: marquee 40s linear infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-22px) rotate(6deg); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.55; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.08); }
+}
+
+@keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+    body {
+        background-color: var(--color-ink-950);
+        color: oklch(0.97 0 0);
+        -webkit-font-smoothing: antialiased;
+    }
+}
+
+@layer components {
+    /* Glassmorphism surface */
+    .glass {
+        background: color-mix(in oklab, white 5%, transparent);
+        backdrop-filter: blur(16px);
+        border: 1px solid color-mix(in oklab, white 10%, transparent);
+    }
+
+    /* Gradient text */
+    .text-gradient {
+        background: linear-gradient(90deg, var(--color-brand-bright), var(--color-violet), var(--color-emerald));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+    }
+
+    /* Animated gradient button */
+    .btn-glow {
+        position: relative;
+        background: linear-gradient(120deg, var(--color-brand), var(--color-violet));
+        box-shadow: 0 8px 30px -8px color-mix(in oklab, var(--color-brand) 70%, transparent);
+        transition: transform .25s ease, box-shadow .25s ease;
+    }
+    .btn-glow:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 40px -8px color-mix(in oklab, var(--color-violet) 80%, transparent);
+    }
+
+    /* Shimmer overlay for premium badges */
+    .shimmer {
+        background: linear-gradient(110deg, transparent 35%, color-mix(in oklab, white 65%, transparent) 50%, transparent 65%);
+        background-size: 200% 100%;
+        animation: var(--animate-shimmer);
+    }
+
+    /* 3D tilt card — driven by JS via CSS vars --rx / --ry */
+    .tilt {
+        transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+        transform-style: preserve-3d;
+        transition: transform .15s ease;
+        will-change: transform;
+    }
+    .tilt-pop {
+        transform: translateZ(60px);
+    }
+
+    /* 3D coin */
+    .coin {
+        border-radius: 9999px;
+        background:
+            radial-gradient(circle at 30% 25%, color-mix(in oklab, white 85%, transparent), transparent 45%),
+            conic-gradient(from 220deg, var(--coin-a, #f7c948), var(--coin-b, #b8860b), var(--coin-a, #f7c948));
+        box-shadow:
+            inset 0 -10px 24px rgba(0,0,0,.45),
+            inset 0 8px 16px rgba(255,255,255,.45),
+            0 30px 60px -20px rgba(0,0,0,.7);
+    }
+
+    /* Scroll reveal */
+    .reveal {
+        opacity: 0;
+        transform: translateY(36px);
+        transition: opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1);
+    }
+    .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Navbar gains a glass background after scrolling */
+[data-nav] {
+    transition: background-color .3s ease, backdrop-filter .3s ease, border-color .3s ease;
+    border-bottom: 1px solid transparent;
+}
+[data-nav].is-scrolled {
+    background: color-mix(in oklab, var(--color-ink-950) 72%, transparent);
+    backdrop-filter: blur(14px);
+    border-bottom-color: color-mix(in oklab, white 8%, transparent);
+}
+
+/* Decorative grid used inline on hero */
+.bg-grid {
+    background-image:
+        linear-gradient(to right, color-mix(in oklab, white 4%, transparent) 1px, transparent 1px),
+        linear-gradient(to bottom, color-mix(in oklab, white 4%, transparent) 1px, transparent 1px);
+    background-size: 56px 56px;
+    mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%);
+}
+
+/* ---- Premium upgrade layer ---- */
+
+@property --angle {
+    syntax: "<angle>";
+    initial-value: 0deg;
+    inherits: false;
+}
+@keyframes border-spin { to { --angle: 360deg; } }
+@keyframes aurora {
+    0%, 100% { transform: translate3d(0,0,0) scale(1); }
+    50% { transform: translate3d(4%, -3%, 0) scale(1.12); }
+}
+
+/* Top scroll-progress bar */
+#scroll-progress {
+    position: fixed;
+    inset: 0 auto auto 0;
+    height: 3px;
+    width: 0;
+    z-index: 70;
+    background: linear-gradient(90deg, var(--color-brand-bright), var(--color-violet), var(--color-emerald));
+    box-shadow: 0 0 14px color-mix(in oklab, var(--color-violet) 75%, transparent);
+    transition: width .12s linear;
+}
+
+/* Cursor spotlight overlay (hero) */
+.spotlight {
+    background: radial-gradient(600px circle at var(--mx, 50%) var(--my, -10%),
+        color-mix(in oklab, var(--color-brand) 16%, transparent), transparent 55%);
+    transition: background .25s ease;
+}
+
+/* Animated conic gradient border */
+.gradient-border { position: relative; isolation: isolate; }
+.gradient-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1.5px;
+    background: conic-gradient(from var(--angle), var(--color-brand-bright), var(--color-violet), var(--color-emerald), var(--color-brand-bright));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    animation: border-spin 7s linear infinite;
+    z-index: -1;
+}
+
+/* Rotating headline word */
+.word-rotate {
+    display: inline-block;
+    transition: opacity .35s ease, transform .35s ease, filter .35s ease;
+}
+.word-rotate.swap {
+    opacity: 0;
+    transform: translateY(0.45em);
+    filter: blur(6px);
+}
+
+/* Hero constellation canvas */
+#constellation {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+/* FAQ accordion */
+.faq-body {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .35s ease;
+}
+.faq-item.open .faq-body { grid-template-rows: 1fr; }
+.faq-body > div { overflow: hidden; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+
+/* Magnetic targets get a smoother return */
+[data-magnetic] { transition: transform .25s cubic-bezier(.2,.8,.2,1); }
+
+/* Full-screen mobile menu entrance */
+@keyframes overlay-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+@keyframes nav-item-in {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+.nav-overlay { animation: overlay-in .2s ease; }
+.nav-overlay .nav-item { animation: nav-item-in .4s cubic-bezier(.2,.8,.2,1) backwards; }
+.nav-overlay .nav-item:nth-child(1) { animation-delay: .05s; }
+.nav-overlay .nav-item:nth-child(2) { animation-delay: .10s; }
+.nav-overlay .nav-item:nth-child(3) { animation-delay: .15s; }
+.nav-overlay .nav-item:nth-child(4) { animation-delay: .20s; }
+.nav-overlay .nav-item:nth-child(5) { animation-delay: .25s; }
+.nav-overlay .nav-item:nth-child(6) { animation-delay: .30s; }
+
+@media (prefers-reduced-motion: reduce) {
+    .nav-overlay, .nav-overlay .nav-item { animation: none !important; }
+}
+
+/* ---- 3D animated objects ---- */
+@keyframes spin-y { to { transform: rotateY(360deg); } }
+@keyframes orbit-cw { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes cube-spin { from { transform: rotateX(-18deg) rotateY(0deg); } to { transform: rotateX(-18deg) rotateY(360deg); } }
+
+.scene-3d { perspective: 900px; }
+
+/* True 3D spinning coin (wrap a .coin in this) */
+.coin-spin {
+    transform-style: preserve-3d;
+    animation: spin-y 7s linear infinite;
+}
+
+/* Orbital system */
+.orbit-spin {
+    transform-style: preserve-3d;
+    animation: orbit-cw linear infinite;
+    will-change: transform;
+}
+
+/* Rotating 3D cube */
+.cube {
+    position: relative;
+    transform-style: preserve-3d;
+    animation: cube-spin 16s linear infinite;
+    will-change: transform;
+}
+.cube__face {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 1.25rem;
+    border: 1px solid color-mix(in oklab, white 14%, transparent);
+    background: color-mix(in oklab, var(--color-ink-900) 70%, transparent);
+    backdrop-filter: blur(6px);
+    box-shadow: inset 0 0 40px color-mix(in oklab, var(--color-brand) 22%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .coin-spin, .orbit-spin, .cube { animation: none !important; }
+}
+
+/* Google Translate — hide all default chrome, keep only our custom dropdown */
+.goog-te-banner-frame.skiptranslate,
+.goog-te-gadget-icon,
+#goog-gt-tt,
+.goog-te-balloon-frame {
+    display: none !important;
+}
+.goog-te-gadget {
+    height: 0;
+    overflow: hidden;
+}
+body {
+    top: 0 !important;
+}
+/* Remove the highlight Google adds to translated text */
+.goog-text-highlight {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .reveal { opacity: 1; transform: none; transition: none; }
+    .animate-float, .animate-float-slow, .animate-spin-slow, .animate-pulse-glow { animation: none !important; }
+    .gradient-border::before { animation: none !important; }
+    #constellation { display: none; }
+}

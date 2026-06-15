@@ -1,0 +1,69 @@
+<x-app-layout :title="$config['title'].' — Wamo'">
+
+    <div class="reveal flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div>
+            <p class="text-sm font-semibold uppercase tracking-widest text-brand-bright">{{ $config['eyebrow'] }}</p>
+            <h1 class="mt-1 text-2xl font-black tracking-tight sm:text-3xl">{{ $config['heading'] }}</h1>
+        </div>
+        <span class="rounded-full glass px-4 py-2 text-sm text-white/70">Balance <span class="ml-1 font-bold text-white">${{ number_format((float) $user->balance, 2) }}</span></span>
+    </div>
+
+    {{-- Live chart --}}
+    <div class="reveal mt-6 overflow-hidden rounded-3xl glass p-2">
+        <div class="h-[460px] w-full overflow-hidden rounded-2xl">
+            <div class="tradingview-widget-container h-full w-full">
+                <div class="tradingview-widget-container__widget h-full w-full"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                {
+                "autosize": true,
+                "symbol": "{{ $config['tvSymbol'] }}",
+                "interval": "60",
+                "timezone": "Etc/UTC",
+                "theme": "dark",
+                "style": "1",
+                "locale": "en",
+                "hide_side_toolbar": true,
+                "allow_symbol_change": true,
+                "support_host": "https://www.tradingview.com"
+                }
+                </script>
+            </div>
+        </div>
+    </div>
+
+    {{-- Asset list with trade forms --}}
+    <h2 class="reveal mt-10 text-xl font-bold">Markets</h2>
+    <div class="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        @foreach ($config['assets'] as [$symbol, $name, $price, $change, $up, $grad])
+            <div class="reveal flex flex-col rounded-3xl glass p-5" data-delay="{{ ($loop->index % 3) * 60 }}">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br {{ $grad }} text-sm font-black text-white">{{ \Illuminate\Support\Str::of($symbol)->before('/')->substr(0, 4) }}</span>
+                        <div class="min-w-0">
+                            <p class="font-bold leading-tight">{{ $symbol }}</p>
+                            <p class="truncate text-xs text-white/50">{{ $name }}</p>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <p class="font-bold tabular-nums">{{ \Illuminate\Support\Str::contains($symbol, '/') ? '' : '$' }}{{ $price }}</p>
+                        <p class="text-xs font-semibold {{ $up ? 'text-emerald' : 'text-rose-400' }}">{{ $change }}</p>
+                    </div>
+                </div>
+
+                <form action="{{ route('user.trade') }}" method="post" class="mt-5">
+                    @csrf
+                    <input type="hidden" name="market" value="{{ $market }}">
+                    <input type="hidden" name="symbol" value="{{ $symbol }}">
+                    <div class="flex items-center rounded-2xl bg-white/5 px-3 ring-1 ring-white/10 focus-within:ring-brand-bright">
+                        <span class="text-white/40">$</span>
+                        <input type="number" name="amount" min="1" step="0.01" placeholder="Amount" class="w-full bg-transparent py-2.5 pl-1 text-sm font-semibold text-white outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none">
+                    </div>
+                    <button type="submit" class="btn-glow mt-3 w-full rounded-2xl py-2.5 text-sm font-bold text-white">Buy {{ \Illuminate\Support\Str::of($symbol)->before('/') }}</button>
+                </form>
+            </div>
+        @endforeach
+    </div>
+
+    <p class="reveal mt-6 text-xs text-white/35">Demo trading desk · executed trades are settled from your wallet balance. Prices are illustrative; the chart above shows live market data.</p>
+
+</x-app-layout>

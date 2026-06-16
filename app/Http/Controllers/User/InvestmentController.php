@@ -18,14 +18,14 @@ class InvestmentController extends Controller
     public function index(Request $request): View
     {
         $user = $request->user();
-        $investments = $user->investments()->with('plan')->get();
+        $active = $user->investments()->where('status', 'active');
 
         return view('user.invest', [
             'user' => $user,
             'plans' => InvestmentPlan::active()->get(),
-            'investments' => $investments,
-            'totalInvested' => $investments->where('status', 'active')->sum('amount'),
-            'expectedReturns' => $investments->where('status', 'active')->sum('expected_return'),
+            'investments' => $user->investments()->with('plan')->paginate(10),
+            'totalInvested' => (float) $active->sum('amount'),
+            'expectedReturns' => (float) $active->clone()->sum('expected_return'),
         ]);
     }
 

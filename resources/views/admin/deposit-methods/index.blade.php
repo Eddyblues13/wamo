@@ -7,7 +7,7 @@
 
     <div class="overflow-hidden rounded-3xl glass">
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
+            <table class="table-cards w-full text-left text-sm">
                 <thead class="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
                     <tr>
                         <th class="px-6 py-4 font-medium">Method</th>
@@ -30,15 +30,15 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 capitalize text-white/70">{{ $m->type }}</td>
-                            <td class="px-6 py-4">
+                            <td data-label="Type" class="px-6 py-4 capitalize text-white/70">{{ $m->type }}</td>
+                            <td data-label="Address / Account" class="px-6 py-4">
                                 <code class="break-all text-xs text-white/70">{{ $m->isCrypto() ? $m->address : ($m->bank_name.' · '.$m->account_number) }}</code>
                             </td>
-                            <td class="px-6 py-4 text-right tabular-nums text-white/70">${{ number_format((float) $m->min_amount) }}</td>
-                            <td class="px-6 py-4 text-center">
+                            <td data-label="Min" class="px-6 py-4 text-right tabular-nums text-white/70">${{ number_format((float) $m->min_amount) }}</td>
+                            <td data-label="Status" class="px-6 py-4 text-center">
                                 <span class="rounded-full px-2.5 py-1 text-xs font-semibold {{ $m->is_active ? 'bg-emerald/15 text-emerald' : 'bg-white/10 text-white/50' }}">{{ $m->is_active ? 'Active' : 'Hidden' }}</span>
                             </td>
-                            <td class="px-6 py-4 text-right">
+                            <td data-label="" class="px-6 py-4 text-right">
                                 <div class="inline-flex items-center gap-3">
                                     <a href="{{ route('admin.deposit-methods.edit', $m) }}" class="text-sm font-semibold text-brand-bright hover:underline">Edit</a>
                                     <form action="{{ route('admin.deposit-methods.destroy', $m) }}" method="post" onsubmit="return confirm('Delete this method?')">
@@ -55,5 +55,7 @@
             </table>
         </div>
     </div>
+
+    <div class="mt-6">{{ $methods->links() }}</div>
 
 </x-admin-layout>

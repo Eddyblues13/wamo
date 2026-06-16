@@ -9,14 +9,14 @@
 
     <div class="overflow-hidden rounded-3xl glass">
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
+            <table class="table-cards w-full text-left text-sm">
                 <thead class="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
                     <tr>
                         <th class="px-6 py-4 font-medium">User</th>
                         <th class="px-6 py-4 font-medium">Type</th>
-                        <th class="hidden px-6 py-4 font-medium sm:table-cell">Description</th>
+                        <th class="hidden px-6 py-4 font-medium md:table-cell">Description</th>
                         <th class="px-6 py-4 text-right font-medium">Amount</th>
-                        <th class="hidden px-6 py-4 text-right font-medium sm:table-cell">Balance</th>
+                        <th class="hidden px-6 py-4 text-right font-medium md:table-cell">Balance</th>
                         <th class="px-6 py-4 text-right font-medium">Date</th>
                     </tr>
                 </thead>
@@ -26,13 +26,13 @@
                             <td class="px-6 py-4">
                                 <a href="{{ route('admin.users.show', $txn->user) }}" class="font-medium hover:text-brand-bright">{{ $txn->user?->name }}</a>
                             </td>
-                            <td class="px-6 py-4">
+                            <td data-label="Type" class="px-6 py-4">
                                 <span class="rounded-full px-2.5 py-1 text-xs font-semibold capitalize {{ $txn->isCredit() ? 'bg-emerald/15 text-emerald' : 'bg-white/10 text-white/70' }}">{{ $txn->type }}</span>
                             </td>
-                            <td class="hidden px-6 py-4 text-white/55 sm:table-cell">{{ $txn->description }}</td>
-                            <td class="px-6 py-4 text-right font-semibold tabular-nums {{ $txn->isCredit() ? 'text-emerald' : 'text-rose-400' }}">{{ $txn->isCredit() ? '+' : '−' }}${{ number_format((float) $txn->amount, 2) }}</td>
-                            <td class="hidden px-6 py-4 text-right tabular-nums text-white/55 sm:table-cell">${{ number_format((float) $txn->balance_after, 2) }}</td>
-                            <td class="px-6 py-4 text-right tabular-nums text-white/50">{{ $txn->created_at->format('M j, Y') }}</td>
+                            <td data-label="Description" class="px-6 py-4 text-white/55 md:table-cell">{{ $txn->description }}</td>
+                            <td data-label="Amount" class="px-6 py-4 text-right font-semibold tabular-nums {{ $txn->isCredit() ? 'text-emerald' : 'text-rose-400' }}">{{ $txn->isCredit() ? '+' : '−' }}${{ number_format((float) $txn->amount, 2) }}</td>
+                            <td data-label="Balance" class="px-6 py-4 text-right tabular-nums text-white/55 md:table-cell">${{ number_format((float) $txn->balance_after, 2) }}</td>
+                            <td data-label="Date" class="px-6 py-4 text-right tabular-nums text-white/50">{{ $txn->created_at->format('M j, Y') }}</td>
                         </tr>
                     @empty
                         <tr><td colspan="6" class="px-6 py-10 text-center text-white/45">No transactions found.</td></tr>

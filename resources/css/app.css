@@ -229,6 +229,49 @@
 /* Magnetic targets get a smoother return */
 [data-magnetic] { transition: transform .25s cubic-bezier(.2,.8,.2,1); }
 
+/* Responsive tables → cards on mobile (add class "table-cards", give each <td> a data-label) */
+@media (max-width: 767px) {
+    table.table-cards thead { display: none; }
+    table.table-cards,
+    table.table-cards tbody { display: block; width: 100%; }
+    table.table-cards tbody > tr {
+        display: block;
+        margin-bottom: 0.75rem;
+        border: 1px solid color-mix(in oklab, white 8%, transparent) !important;
+        border-radius: 1rem;
+        background: color-mix(in oklab, white 3%, transparent);
+        overflow: hidden;
+    }
+    table.table-cards td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        text-align: right;
+        padding: 0.6rem 0.95rem !important;
+        border: 0 !important;
+    }
+    table.table-cards td::before {
+        content: attr(data-label);
+        text-align: left;
+        font-size: 0.68rem;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        font-weight: 600;
+        white-space: nowrap;
+        color: color-mix(in oklab, white 45%, transparent);
+    }
+    table.table-cards td:empty { display: none; }
+    /* the first cell (no data-label) becomes the card header band */
+    table.table-cards td:not([data-label]) {
+        display: block;
+        text-align: left;
+        background: color-mix(in oklab, white 4%, transparent);
+        padding: 0.8rem 0.95rem !important;
+    }
+    table.table-cards td:not([data-label])::before { content: none; }
+}
+
 /* Full-screen mobile menu entrance */
 @keyframes overlay-in {
     from { opacity: 0; }

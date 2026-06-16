@@ -57,7 +57,7 @@
     <div class="mt-6 rounded-3xl glass p-6">
         <h3 class="font-bold">Investments</h3>
         <div class="mt-4 overflow-x-auto">
-            <table class="w-full text-left text-sm">
+            <table class="table-cards w-full text-left text-sm">
                 <thead class="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
                     <tr><th class="py-3 pr-4 font-medium">Plan</th><th class="py-3 pr-4 text-right font-medium">Amount</th><th class="py-3 pr-4 text-right font-medium">Return</th><th class="py-3 pr-4 text-right font-medium">Matures</th><th class="py-3 text-right font-medium">Status</th></tr>
                 </thead>
@@ -65,10 +65,10 @@
                     @forelse ($user->investments as $inv)
                         <tr>
                             <td class="py-3 pr-4 font-medium">{{ $inv->plan->name }}</td>
-                            <td class="py-3 pr-4 text-right tabular-nums">${{ number_format((float) $inv->amount, 2) }}</td>
-                            <td class="py-3 pr-4 text-right tabular-nums text-emerald">+${{ number_format((float) $inv->expected_return, 2) }}</td>
-                            <td class="py-3 pr-4 text-right tabular-nums text-white/55">{{ $inv->matures_at?->format('M j, Y') }}</td>
-                            <td class="py-3 text-right"><span class="rounded-full px-2.5 py-1 text-xs font-semibold capitalize {{ $inv->status === 'active' ? 'bg-emerald/15 text-emerald' : 'bg-white/10 text-white/60' }}">{{ $inv->status }}</span></td>
+                            <td data-label="Amount" class="py-3 pr-4 text-right tabular-nums">${{ number_format((float) $inv->amount, 2) }}</td>
+                            <td data-label="Return" class="py-3 pr-4 text-right tabular-nums text-emerald">+${{ number_format((float) $inv->expected_return, 2) }}</td>
+                            <td data-label="Matures" class="py-3 pr-4 text-right tabular-nums text-white/55">{{ $inv->matures_at?->format('M j, Y') }}</td>
+                            <td data-label="Status" class="py-3 text-right"><span class="rounded-full px-2.5 py-1 text-xs font-semibold capitalize {{ $inv->status === 'active' ? 'bg-emerald/15 text-emerald' : 'bg-white/10 text-white/60' }}">{{ $inv->status }}</span></td>
                         </tr>
                     @empty
                         <tr><td colspan="5" class="py-6 text-center text-white/45">No investments.</td></tr>

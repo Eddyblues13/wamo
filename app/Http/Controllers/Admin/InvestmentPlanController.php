@@ -13,7 +13,7 @@ class InvestmentPlanController extends Controller
 {
     public function index(): View
     {
-        $plans = InvestmentPlan::withCount('investments')->orderBy('sort_order')->get();
+        $plans = InvestmentPlan::withCount('investments')->orderBy('sort_order')->paginate(15);
 
         return view('admin.plans.index', compact('plans'));
     }

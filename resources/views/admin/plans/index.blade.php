@@ -7,7 +7,7 @@
 
     <div class="overflow-hidden rounded-3xl glass">
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
+            <table class="table-cards w-full text-left text-sm">
                 <thead class="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
                     <tr>
                         <th class="px-6 py-4 font-medium">Plan</th>
@@ -31,14 +31,14 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4 text-right font-semibold tabular-nums text-emerald">{{ rtrim(rtrim(number_format((float) $plan->roi_percent, 2), '0'), '.') }}%</td>
-                            <td class="px-6 py-4 text-right tabular-nums text-white/70">${{ number_format((float) $plan->min_amount) }}–{{ number_format((float) $plan->max_amount) }}</td>
-                            <td class="px-6 py-4 text-right tabular-nums text-white/70">{{ $plan->duration_days }}d</td>
-                            <td class="px-6 py-4 text-right tabular-nums text-white/70">{{ $plan->investments_count }}</td>
-                            <td class="px-6 py-4 text-center">
+                            <td data-label="ROI" class="px-6 py-4 text-right font-semibold tabular-nums text-emerald">{{ rtrim(rtrim(number_format((float) $plan->roi_percent, 2), '0'), '.') }}%</td>
+                            <td data-label="Range" class="px-6 py-4 text-right tabular-nums text-white/70">${{ number_format((float) $plan->min_amount) }}–{{ number_format((float) $plan->max_amount) }}</td>
+                            <td data-label="Term" class="px-6 py-4 text-right tabular-nums text-white/70">{{ $plan->duration_days }}d</td>
+                            <td data-label="Investors" class="px-6 py-4 text-right tabular-nums text-white/70">{{ $plan->investments_count }}</td>
+                            <td data-label="Status" class="px-6 py-4 text-center">
                                 <span class="rounded-full px-2.5 py-1 text-xs font-semibold {{ $plan->is_active ? 'bg-emerald/15 text-emerald' : 'bg-white/10 text-white/50' }}">{{ $plan->is_active ? 'Active' : 'Hidden' }}</span>
                             </td>
-                            <td class="px-6 py-4 text-right">
+                            <td data-label="" class="px-6 py-4 text-right">
                                 <div class="inline-flex items-center gap-3">
                                     <a href="{{ route('admin.plans.edit', $plan) }}" class="text-sm font-semibold text-brand-bright hover:underline">Edit</a>
                                     <form action="{{ route('admin.plans.destroy', $plan) }}" method="post" onsubmit="return confirm('Delete this plan?')">
@@ -55,5 +55,7 @@
             </table>
         </div>
     </div>
+
+    <div class="mt-6">{{ $plans->links() }}</div>
 
 </x-admin-layout>

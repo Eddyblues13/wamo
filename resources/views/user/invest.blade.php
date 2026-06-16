@@ -60,7 +60,7 @@
         @else
             <div class="reveal mt-6 overflow-hidden rounded-3xl glass">
                 <div class="overflow-x-auto">
-                    <table class="w-full text-left text-sm">
+                    <table class="table-cards w-full text-left text-sm">
                         <thead class="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
                             <tr>
                                 <th class="px-6 py-4 font-medium">Plan</th>
@@ -79,10 +79,10 @@
                                             <span class="font-semibold">{{ $inv->plan->name }}</span>
                                         </div>
                                     </td>
-                                    <td class="px-6 py-4 text-right font-semibold tabular-nums">${{ number_format((float) $inv->amount, 2) }}</td>
-                                    <td class="px-6 py-4 text-right font-semibold tabular-nums text-emerald">+${{ number_format((float) $inv->expected_return, 2) }}</td>
-                                    <td class="hidden px-6 py-4 text-right tabular-nums text-white/60 sm:table-cell">{{ $inv->matures_at?->format('M j, Y') }}</td>
-                                    <td class="px-6 py-4 text-right">
+                                    <td data-label="Amount" class="px-6 py-4 text-right font-semibold tabular-nums">${{ number_format((float) $inv->amount, 2) }}</td>
+                                    <td data-label="Expected return" class="px-6 py-4 text-right font-semibold tabular-nums text-emerald">+${{ number_format((float) $inv->expected_return, 2) }}</td>
+                                    <td data-label="Matures" class="px-6 py-4 text-right tabular-nums text-white/60 md:table-cell">{{ $inv->matures_at?->format('M j, Y') }}</td>
+                                    <td data-label="Status" class="px-6 py-4 text-right">
                                         <span class="rounded-full bg-emerald/15 px-3 py-1 text-xs font-semibold capitalize text-emerald">{{ $inv->status }}</span>
                                     </td>
                                 </tr>
@@ -91,6 +91,8 @@
                     </table>
                 </div>
             </div>
+
+            <div class="reveal mt-6">{{ $investments->links() }}</div>
         @endif
     </div>
 

@@ -27,13 +27,13 @@
             </div>
         @else
             <div class="reveal mt-6 overflow-hidden rounded-3xl glass">
-                <table class="w-full text-left text-sm">
+                <table class="table-cards w-full text-left text-sm">
                     <thead class="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
                         <tr>
                             <th class="px-6 py-4 font-medium">Type</th>
-                            <th class="hidden px-6 py-4 font-medium sm:table-cell">Description</th>
+                            <th class="hidden px-6 py-4 font-medium md:table-cell">Description</th>
                             <th class="px-6 py-4 text-right font-medium">Amount</th>
-                            <th class="hidden px-6 py-4 text-right font-medium sm:table-cell">Balance</th>
+                            <th class="hidden px-6 py-4 text-right font-medium md:table-cell">Balance</th>
                             <th class="px-6 py-4 text-right font-medium">Date</th>
                         </tr>
                     </thead>
@@ -43,12 +43,12 @@
                                 <td class="px-6 py-4">
                                     <span class="rounded-full px-3 py-1 text-xs font-semibold capitalize {{ $txn->isCredit() ? 'bg-emerald/15 text-emerald' : 'bg-white/10 text-white/70' }}">{{ $txn->type }}</span>
                                 </td>
-                                <td class="hidden px-6 py-4 text-white/60 sm:table-cell">{{ $txn->description }}</td>
-                                <td class="px-6 py-4 text-right font-semibold tabular-nums {{ $txn->isCredit() ? 'text-emerald' : 'text-rose-400' }}">
+                                <td data-label="Description" class="px-6 py-4 text-white/60 md:table-cell">{{ $txn->description }}</td>
+                                <td data-label="Amount" class="px-6 py-4 text-right font-semibold tabular-nums {{ $txn->isCredit() ? 'text-emerald' : 'text-rose-400' }}">
                                     {{ $txn->isCredit() ? '+' : '−' }}${{ number_format((float) $txn->amount, 2) }}
                                 </td>
-                                <td class="hidden px-6 py-4 text-right tabular-nums text-white/60 sm:table-cell">${{ number_format((float) $txn->balance_after, 2) }}</td>
-                                <td class="px-6 py-4 text-right tabular-nums text-white/50">{{ $txn->created_at->format('M j, Y') }}</td>
+                                <td data-label="Balance" class="px-6 py-4 text-right tabular-nums text-white/60 md:table-cell">${{ number_format((float) $txn->balance_after, 2) }}</td>
+                                <td data-label="Date" class="px-6 py-4 text-right tabular-nums text-white/50">{{ $txn->created_at->format('M j, Y') }}</td>
                             </tr>
                         @endforeach
                     </tbody>

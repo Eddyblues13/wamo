@@ -12,7 +12,7 @@ class DepositMethodController extends Controller
 {
     public function index(): View
     {
-        $methods = DepositMethod::orderBy('sort_order')->get();
+        $methods = DepositMethod::orderBy('sort_order')->paginate(15);
 
         return view('admin.deposit-methods.index', compact('methods'));
     }

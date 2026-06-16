@@ -10,7 +10,7 @@
 
     <div class="overflow-hidden rounded-3xl glass">
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
+            <table class="table-cards w-full text-left text-sm">
                 <thead class="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
                     <tr>
                         <th class="px-6 py-4 font-medium">User</th>
@@ -33,17 +33,17 @@
                                     </div>
                                 </div>
                             </td>
-                            <td class="px-6 py-4">
+                            <td data-label="Status" class="px-6 py-4">
                                 @if ($user->email_verified_at)
                                     <span class="rounded-full bg-emerald/15 px-2.5 py-1 text-xs font-semibold text-emerald">Verified</span>
                                 @else
                                     <span class="rounded-full bg-amber-400/15 px-2.5 py-1 text-xs font-semibold text-amber-300">Pending</span>
                                 @endif
                             </td>
-                            <td class="px-6 py-4 text-right font-semibold tabular-nums">${{ number_format((float) $user->balance, 2) }}</td>
-                            <td class="px-6 py-4 text-right tabular-nums text-white/70">{{ $user->investments_count }}</td>
-                            <td class="px-6 py-4 text-right tabular-nums text-white/50">{{ $user->created_at->format('M j, Y') }}</td>
-                            <td class="px-6 py-4 text-right">
+                            <td data-label="Balance" class="px-6 py-4 text-right font-semibold tabular-nums">${{ number_format((float) $user->balance, 2) }}</td>
+                            <td data-label="Investments" class="px-6 py-4 text-right tabular-nums text-white/70">{{ $user->investments_count }}</td>
+                            <td data-label="Joined" class="px-6 py-4 text-right tabular-nums text-white/50">{{ $user->created_at->format('M j, Y') }}</td>
+                            <td data-label="" class="px-6 py-4 text-right">
                                 <a href="{{ route('admin.users.show', $user) }}" class="text-sm font-semibold text-brand-bright hover:underline">Manage</a>
                             </td>
                         </tr>

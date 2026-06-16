@@ -18,7 +18,7 @@
             <x-section-heading class="!mx-0 !text-left" eyebrow="Top movers" title="Live market overview" />
 
             <div class="reveal mt-10 overflow-hidden rounded-3xl glass">
-                <table class="w-full text-left text-sm">
+                <table class="table-cards w-full text-left text-sm">
                     <thead class="border-b border-white/10 text-xs uppercase tracking-wider text-white/40">
                         <tr>
                             <th class="px-6 py-4 font-medium">Asset</th>
@@ -52,10 +52,10 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td class="px-6 py-4 text-right font-semibold tabular-nums">{{ $price }}</td>
-                                <td class="px-6 py-4 text-right font-semibold tabular-nums {{ $up ? 'text-emerald' : 'text-rose-400' }}">{{ $chg }}</td>
-                                <td class="hidden px-6 py-4 text-right tabular-nums text-white/60 sm:table-cell">{{ $cap }}</td>
-                                <td class="px-6 py-4 text-right">
+                                <td data-label="Price" class="px-6 py-4 text-right font-semibold tabular-nums">{{ $price }}</td>
+                                <td data-label="24h" class="px-6 py-4 text-right font-semibold tabular-nums {{ $up ? 'text-emerald' : 'text-rose-400' }}">{{ $chg }}</td>
+                                <td data-label="Market cap" class="px-6 py-4 text-right tabular-nums text-white/60 md:table-cell">{{ $cap }}</td>
+                                <td data-label="" class="px-6 py-4 text-right">
                                     <a href="{{ route('register') }}" class="rounded-full bg-white px-4 py-1.5 text-xs font-bold text-ink-950 transition hover:bg-brand-bright hover:text-white">Trade</a>
                                 </td>
                             </tr>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationMail;
 use App\Models\InvestmentPlan;
 use App\Models\UserInvestment;
 use Illuminate\Http\RedirectResponse;
@@ -10,10 +11,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
+use Illuminate\View\View;
 
 class InvestmentController extends Controller
 {
-    public function index(Request $request): \Illuminate\View\View
+    public function index(Request $request): View
     {
         $user = $request->user();
         $investments = $user->investments()->with('plan')->get();
@@ -63,6 +65,22 @@ class InvestmentController extends Controller
                 'matures_at' => Carbon::now()->addDays($plan->duration_days),
             ]);
         });
+
+        NotificationMail::deliver(
+            $user,
+            'Investment activated',
+            'Your investment is now active',
+            ['Your investment has been activated successfully. You can track its performance from your dashboard.'],
+            [
+                'Plan' => $plan->name,
+                'Amount invested' => '$'.number_format($amount, 2),
+                'Expected return' => '+$'.number_format($plan->returnFor($amount), 2),
+                'Matures on' => Carbon::now()->addDays($plan->duration_days)->format('M j, Y'),
+            ],
+            null,
+            'View investments',
+            route('user.invest'),
+        );
 
         return redirect()->route('user.dashboard')
             ->with('status', "Your {$plan->name} investment is now active.");

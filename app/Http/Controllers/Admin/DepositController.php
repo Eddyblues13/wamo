@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationMail;
 use App\Models\DepositRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -39,6 +40,21 @@ class DepositController extends Controller
             $deposit->user->credit((float) $deposit->amount, 'deposit', "Deposit · {$deposit->method_label}");
             $deposit->update(['status' => 'approved', 'processed_at' => Carbon::now()]);
         });
+
+        NotificationMail::deliver(
+            $deposit->user,
+            'Deposit approved — funds credited',
+            'Your deposit was approved',
+            ['Great news — your deposit has been confirmed and credited to your wallet.'],
+            [
+                'Amount' => '$'.number_format((float) $deposit->amount, 2),
+                'Method' => $deposit->method_label,
+                'New balance' => '$'.number_format((float) $deposit->user->balance, 2),
+            ],
+            null,
+            'Go to dashboard',
+            route('user.dashboard'),
+        );
 
         return back()->with('status', 'Deposit approved and wallet credited.');
     }

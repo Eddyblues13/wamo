@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationMail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -106,6 +107,19 @@ class TradeController extends Controller
 
         $symbol = strtoupper($validated['symbol']);
         $user->debit($amount, 'trade', "Bought \${$amount} of {$symbol}");
+
+        NotificationMail::deliver(
+            $user,
+            'Trade executed',
+            'Your trade was executed',
+            ['Your order has been filled successfully and settled from your wallet.'],
+            [
+                'Market' => ucfirst($validated['market']),
+                'Asset' => $symbol,
+                'Amount' => '$'.number_format($amount, 2),
+                'Wallet balance' => '$'.number_format((float) $user->balance, 2),
+            ],
+        );
 
         return redirect()->route('user.'.$validated['market'])
             ->with('status', "Trade executed: \${$amount} of {$symbol}.");

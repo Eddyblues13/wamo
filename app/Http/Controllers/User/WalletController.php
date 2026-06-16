@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationMail;
 use App\Models\DepositMethod;
 use App\Models\DepositRequest;
 use Illuminate\Http\RedirectResponse;
@@ -67,6 +68,19 @@ class WalletController extends Controller
             'status' => 'pending',
         ]);
 
+        NotificationMail::deliver(
+            $request->user(),
+            'Deposit request received',
+            'Your deposit is pending',
+            ['We have received your deposit request and it is now pending confirmation.'],
+            [
+                'Amount' => '$'.number_format($amount, 2),
+                'Method' => $method->name,
+                'Status' => 'Pending',
+            ],
+            'Your wallet will be credited as soon as your payment is confirmed by our team.',
+        );
+
         return redirect()->route('user.deposit')->with('processing', true);
     }
 
@@ -86,7 +100,20 @@ class WalletController extends Controller
         }
 
         $method = $validated['method'] ?? 'Bank transfer';
-        $request->user()->debit($amount, 'withdrawal', "Withdrawal · {$method}");
+        $user = $request->user();
+        $user->debit($amount, 'withdrawal', "Withdrawal · {$method}");
+
+        NotificationMail::deliver(
+            $user,
+            'Withdrawal processed',
+            'Your withdrawal is on its way',
+            ['Your withdrawal request has been processed successfully.'],
+            [
+                'Amount' => '$'.number_format($amount, 2),
+                'Destination' => $method,
+                'Remaining balance' => '$'.number_format((float) $user->balance, 2),
+            ],
+        );
 
         return redirect()->route('user.withdraw')->with('status', 'Your withdrawal has been processed.');
     }

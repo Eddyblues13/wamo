@@ -8,7 +8,7 @@
 <body style="margin:0;background:#0b0f1a;font-family:Helvetica,Arial,sans-serif;color:#e8ecf5;">
     <div style="max-width:480px;margin:0 auto;padding:40px 24px;">
         <div style="text-align:center;margin-bottom:28px;">
-            <span style="display:inline-block;font-size:22px;font-weight:800;color:#ffffff;">Wamo</span>
+            <span style="display:inline-block;font-size:22px;font-weight:800;color:#ffffff;">Wamo</span><span style="font-size:22px;font-weight:800;color:#8ab4ff;"> International</span>
         </div>
 
         <div style="background:#121726;border:1px solid #232a3d;border-radius:20px;padding:32px;text-align:center;">
@@ -27,7 +27,7 @@
         </div>
 
         <p style="text-align:center;margin:24px 0 0;font-size:12px;color:#5f6982;">
-            © {{ date('Y') }} Wamo. Investing involves risk. Capital at risk.
+            © {{ date('Y') }} Wamo International. Investing involves risk. Capital at risk.
         </p>
     </div>
 </body>

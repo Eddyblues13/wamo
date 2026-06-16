@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\NotificationMail;
 use App\Mail\VerificationCodeMail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -55,6 +56,23 @@ class EmailVerificationController extends Controller
         }
 
         $user->markEmailVerified();
+
+        NotificationMail::deliver(
+            $user,
+            'Welcome to Wamo International',
+            'Welcome aboard, '.$user->name.'!',
+            [
+                'Your account is verified and ready to go. Welcome to Wamo International — the modern platform to invest in crypto, stocks, forex and more.',
+                'Here’s how to get started:',
+                '1. Fund your wallet from the Deposit page.',
+                '2. Explore investment plans or trade stocks, forex and crypto.',
+                '3. Track your portfolio and grow your wealth.',
+            ],
+            [],
+            'Our team is here to help whenever you need us. Welcome to the community!',
+            'Go to your dashboard',
+            route('user.dashboard'),
+        );
 
         return redirect()->route('user.dashboard')->with('status', 'Your email has been verified.');
     }

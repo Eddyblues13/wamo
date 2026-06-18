@@ -37,8 +37,8 @@
                             <a href="{{ route('register') }}" class="rounded-full bg-white px-4 py-2 text-sm font-bold text-ink-950 transition hover:bg-brand-bright hover:text-white">Buy</a>
                         </div>
                         <div class="mt-5 flex items-end justify-between">
-                            <p class="text-xl font-bold tabular-nums" data-stock-price>{{ $price }}</p>
-                            <p class="text-sm font-semibold {{ $up ? 'text-emerald' : 'text-rose-400' }}" data-stock-change>{{ $chg }} today</p>
+                            <p class="text-xl font-bold tabular-nums" data-live="{{ $sym }}USDT" data-live-prefix="$">{{ $price }}</p>
+                            <p class="text-sm font-semibold {{ $up ? 'text-emerald' : 'text-rose-400' }}" data-live-change="{{ $sym }}USDT" data-live-suffix=" today">{{ $chg }} today</p>
                         </div>
                     </div>
                 @endforeach

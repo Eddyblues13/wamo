@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initConstellation();
     initRotatingWord();
     initMagnetic();
-    initLiveStocks();
+    initLivePrices();
     initFaq();
 });
 
@@ -138,15 +138,15 @@ function initTradePanel() {
     const buyBtn = panel.querySelector('[data-trade-side="buy"]');
     const sellBtn = panel.querySelector('[data-trade-side="sell"]');
 
-    let price = 67420;
-    const base = price;
+    const symbol = panel.dataset.trade || 'BTCUSDT';
+    let price = parseFloat(panel.dataset.tradePrice) || 0;
     let side = 'buy';
 
     const fmt = (n, d = 2) => n.toLocaleString(undefined, { minimumFractionDigits: d, maximumFractionDigits: d });
 
     function recalc() {
         const amount = parseFloat(amountEl.value) || 0;
-        qtyEl.textContent = (amount / price).toFixed(5) + ' BTC';
+        qtyEl.textContent = (price > 0 ? (amount / price).toFixed(5) : '0.00000') + ' BTC';
         feeEl.textContent = '$' + fmt(amount * 0.001);
     }
 
@@ -187,26 +187,34 @@ function initTradePanel() {
         setTimeout(() => { submitEl.textContent = original; }, 1800);
     });
 
-    // Simulated live price ticking (random walk around the base).
-    function tick() {
-        const prev = price;
-        price = Math.max(base * 0.95, price + (Math.random() - 0.5) * base * 0.0009);
-        priceEl.textContent = fmt(price);
-        const pct = ((price - base) / base) * 100;
-        changeEl.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%';
-        changeEl.classList.toggle('text-emerald', pct >= 0);
-        changeEl.classList.toggle('text-rose-400', pct < 0);
-        priceEl.classList.remove('text-emerald', 'text-rose-400');
-        priceEl.classList.add(price >= prev ? 'text-emerald' : 'text-rose-400');
-        setTimeout(() => priceEl.classList.remove('text-emerald', 'text-rose-400'), 350);
-        recalc();
+    // Real live price from Binance (free, no key, accurate).
+    async function fetchPrice() {
+        try {
+            const res = await fetch('https://api.binance.com/api/v3/ticker/24hr?symbol=' + symbol);
+            if (!res.ok) return;
+            const d = await res.json();
+            const prev = price;
+            price = parseFloat(d.lastPrice);
+            const pct = parseFloat(d.priceChangePercent);
+            priceEl.textContent = fmt(price);
+            changeEl.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%';
+            changeEl.classList.toggle('text-emerald', pct >= 0);
+            changeEl.classList.toggle('text-rose-400', pct < 0);
+            priceEl.classList.remove('text-emerald', 'text-rose-400');
+            if (prev && price !== prev) {
+                priceEl.classList.add(price >= prev ? 'text-emerald' : 'text-rose-400');
+                setTimeout(() => priceEl.classList.remove('text-emerald', 'text-rose-400'), 500);
+            }
+            recalc();
+        } catch (e) {
+            /* keep last known price on network error */
+        }
     }
 
     recalc();
     paintSide();
-    if (!reduceMotion) {
-        setInterval(tick, 1500);
-    }
+    fetchPrice();
+    setInterval(fetchPrice, 15000);
 }
 
 /* Thin gradient bar showing how far down the page the user is */
@@ -329,32 +337,61 @@ function initMagnetic() {
     });
 }
 
-/* Simulated live ticking on the stock cards */
-function initLiveStocks() {
-    const cards = document.querySelectorAll('[data-stock-price]');
-    if (!cards.length || reduceMotion) return;
+/* Real live crypto prices from Binance's public API (free, no key, accurate).
+   Price elements: [data-live="BTCUSDT"]  ·  change elements: [data-live-change="BTCUSDT"] */
+function initLivePrices() {
+    const priceEls = [...document.querySelectorAll('[data-live]')];
+    const changeEls = [...document.querySelectorAll('[data-live-change]')];
+    if (!priceEls.length && !changeEls.length) return;
 
-    cards.forEach((priceEl) => {
-        const base = parseFloat(priceEl.textContent.replace(/[^0-9.]/g, '')) || 0;
-        const changeEl = priceEl.parentElement.querySelector('[data-stock-change]');
-        let price = base;
+    const symbols = [...new Set([
+        ...priceEls.map((e) => e.dataset.live),
+        ...changeEls.map((e) => e.dataset.liveChange),
+    ])];
+    if (!symbols.length) return;
 
-        setInterval(() => {
-            const prev = price;
-            price = Math.max(base * 0.9, price + (Math.random() - 0.5) * base * 0.004);
-            priceEl.textContent = '$' + price.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-            priceEl.classList.remove('text-emerald', 'text-rose-400');
-            priceEl.classList.add(price >= prev ? 'text-emerald' : 'text-rose-400');
-            setTimeout(() => priceEl.classList.remove('text-emerald', 'text-rose-400'), 400);
+    const fmtPrice = (n) => {
+        const decimals = n >= 1 ? 2 : 5;
+        return n.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals });
+    };
 
-            if (changeEl) {
-                const pct = ((price - base) / base) * 100;
-                changeEl.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(2) + '% today';
-                changeEl.classList.toggle('text-emerald', pct >= 0);
-                changeEl.classList.toggle('text-rose-400', pct < 0);
-            }
-        }, 2000 + Math.random() * 1500);
-    });
+    async function refresh() {
+        try {
+            const url = 'https://api.binance.com/api/v3/ticker/24hr?symbols=' + encodeURIComponent(JSON.stringify(symbols));
+            const res = await fetch(url);
+            if (!res.ok) return;
+            const rows = await res.json();
+            const map = Object.fromEntries(rows.map((r) => [r.symbol, r]));
+
+            priceEls.forEach((el) => {
+                const d = map[el.dataset.live];
+                if (!d) return;
+                const price = parseFloat(d.lastPrice);
+                const prev = parseFloat(el.dataset.prev || price);
+                el.textContent = (el.dataset.livePrefix || '$') + fmtPrice(price);
+                el.dataset.prev = price;
+                el.classList.remove('text-emerald', 'text-rose-400');
+                if (price !== prev) {
+                    el.classList.add(price >= prev ? 'text-emerald' : 'text-rose-400');
+                    setTimeout(() => el.classList.remove('text-emerald', 'text-rose-400'), 600);
+                }
+            });
+
+            changeEls.forEach((el) => {
+                const d = map[el.dataset.liveChange];
+                if (!d) return;
+                const pct = parseFloat(d.priceChangePercent);
+                el.textContent = (pct >= 0 ? '+' : '') + pct.toFixed(2) + '%' + (el.dataset.liveSuffix || '');
+                el.classList.toggle('text-emerald', pct >= 0);
+                el.classList.toggle('text-rose-400', pct < 0);
+            });
+        } catch (e) {
+            /* network/API hiccup — keep last known values */
+        }
+    }
+
+    refresh();
+    setInterval(refresh, 15000);
 }
 
 /* Expand/collapse FAQ items */

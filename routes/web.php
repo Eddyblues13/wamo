@@ -1,5 +1,13 @@
 <?php
 
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController as AdminAuthController;
+use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
+use App\Http\Controllers\Admin\DepositController as AdminDepositController;
+use App\Http\Controllers\Admin\DepositMethodController as AdminDepositMethodController;
+use App\Http\Controllers\Admin\InvestmentController as AdminInvestmentController;
+use App\Http\Controllers\Admin\InvestmentPlanController as AdminPlanController;
+use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -9,14 +17,6 @@ use App\Http\Controllers\User\DashboardController;
 use App\Http\Controllers\User\InvestmentController;
 use App\Http\Controllers\User\TradeController;
 use App\Http\Controllers\User\WalletController;
-use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController as AdminAuthController;
-use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
-use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\Admin\InvestmentPlanController as AdminPlanController;
-use App\Http\Controllers\Admin\InvestmentController as AdminInvestmentController;
-use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
-use App\Http\Controllers\Admin\DepositMethodController as AdminDepositMethodController;
-use App\Http\Controllers\Admin\DepositController as AdminDepositController;
 use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'home.index')->name('home');
@@ -110,10 +110,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // Users
         Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+        Route::post('/users/stop-impersonating', [AdminUserController::class, 'stopImpersonating'])->name('users.stop-impersonating');
         Route::get('/users/{user}', [AdminUserController::class, 'show'])->name('users.show');
         Route::get('/users/{user}/edit', [AdminUserController::class, 'edit'])->name('users.edit');
         Route::put('/users/{user}', [AdminUserController::class, 'update'])->name('users.update');
         Route::post('/users/{user}/funds', [AdminUserController::class, 'adjustFunds'])->name('users.funds');
+        Route::post('/users/{user}/email', [AdminUserController::class, 'emailUser'])->name('users.email');
+        Route::post('/users/{user}/block', [AdminUserController::class, 'block'])->name('users.block');
+        Route::post('/users/{user}/clear', [AdminUserController::class, 'clear'])->name('users.clear');
+        Route::post('/users/{user}/impersonate', [AdminUserController::class, 'impersonate'])->name('users.impersonate');
         Route::delete('/users/{user}', [AdminUserController::class, 'destroy'])->name('users.destroy');
 
         // Investment plans (full CRUD)

@@ -24,6 +24,16 @@
 </head>
 <body class="min-h-screen bg-ink-950 text-white font-sans antialiased">
 
+    @if (session()->has('impersonator_admin_id'))
+        <div class="sticky top-0 z-[60] flex flex-col items-center justify-center gap-2 bg-amber-500 px-4 py-2 text-center text-sm font-semibold text-amber-950 sm:flex-row">
+            <span>👁️ You are viewing as {{ auth()->user()->name }} (admin impersonation).</span>
+            <form action="{{ route('admin.users.stop-impersonating') }}" method="post">
+                @csrf
+                <button type="submit" class="rounded-full bg-amber-950/20 px-3 py-1 text-xs font-bold transition hover:bg-amber-950/30">Exit to admin</button>
+            </form>
+        </div>
+    @endif
+
     {{-- Ambient glows --}}
     <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <div class="absolute -top-40 -left-40 h-[34rem] w-[34rem] rounded-full bg-brand/20 blur-[120px]"></div>

@@ -24,6 +24,10 @@ class TradeController extends Controller
                 'eyebrow' => 'Equities',
                 'heading' => 'Buy & trade global stocks',
                 'tvSymbol' => 'NASDAQ:TSLA',
+                'tvSymbols' => [
+                    ['NASDAQ:TSLA', 'Tesla'], ['NASDAQ:AMZN', 'Amazon'], ['NASDAQ:AAPL', 'Apple'],
+                    ['NASDAQ:NVDA', 'Nvidia'], ['NASDAQ:MSFT', 'Microsoft'], ['NASDAQ:META', 'Meta'],
+                ],
                 'assets' => [
                     ['TSLA', 'Tesla, Inc.', '248.50', '+1.9%', true, 'from-red-500 to-rose-600'],
                     ['AMZN', 'Amazon.com', '186.40', '+2.6%', true, 'from-orange-400 to-amber-500'],
@@ -38,6 +42,10 @@ class TradeController extends Controller
                 'eyebrow' => 'Foreign exchange',
                 'heading' => 'Trade currency pairs 24/5',
                 'tvSymbol' => 'FX:EURUSD',
+                'tvSymbols' => [
+                    ['FX:EURUSD', 'EUR/USD'], ['FX:GBPUSD', 'GBP/USD'], ['FX:USDJPY', 'USD/JPY'],
+                    ['FX:AUDUSD', 'AUD/USD'], ['FX:USDCAD', 'USD/CAD'], ['FX:USDCHF', 'USD/CHF'],
+                ],
                 'assets' => [
                     ['EUR/USD', 'Euro / US Dollar', '1.0875', '-0.2%', false, 'from-sky-400 to-indigo-500'],
                     ['GBP/USD', 'Pound / US Dollar', '1.2710', '+0.4%', true, 'from-indigo-400 to-violet-500'],
@@ -52,6 +60,10 @@ class TradeController extends Controller
                 'eyebrow' => 'Digital assets',
                 'heading' => 'Buy & swap cryptocurrencies',
                 'tvSymbol' => 'BINANCE:BTCUSDT',
+                'tvSymbols' => [
+                    ['BINANCE:BTCUSDT', 'BTC'], ['BINANCE:ETHUSDT', 'ETH'], ['BINANCE:SOLUSDT', 'SOL'],
+                    ['BINANCE:XRPUSDT', 'XRP'], ['BINANCE:ADAUSDT', 'ADA'], ['BINANCE:DOGEUSDT', 'DOGE'],
+                ],
                 'assets' => [
                     ['BTC', 'Bitcoin', '67,420.00', '+3.8%', true, 'from-amber-400 to-orange-500'],
                     ['ETH', 'Ethereum', '3,540.10', '+2.4%', true, 'from-indigo-400 to-blue-600'],

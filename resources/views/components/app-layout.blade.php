@@ -21,6 +21,7 @@
     <title>{{ $title }}</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @include('partials.smartsupp')
 </head>
 <body class="min-h-screen bg-ink-950 text-white font-sans antialiased">
 

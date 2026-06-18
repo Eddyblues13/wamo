@@ -12,6 +12,7 @@
     <meta name="description" content="{{ $description }}">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @include('partials.smartsupp')
 </head>
 <body class="bg-ink-950 text-white font-sans antialiased overflow-x-hidden">
 

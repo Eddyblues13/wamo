@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Password;
 use Illuminate\View\View;
+use Throwable;
 
 class PasswordResetLinkController extends Controller
 {
@@ -21,7 +23,17 @@ class PasswordResetLinkController extends Controller
             'email' => ['required', 'email'],
         ]);
 
-        $status = Password::sendResetLink($request->only('email'));
+        try {
+            $status = Password::sendResetLink($request->only('email'));
+        } catch (Throwable $e) {
+            Log::error('Password reset link could not be sent.', [
+                'email' => $request->input('email'),
+                'exception' => $e,
+            ]);
+
+            return back()->withInput($request->only('email'))
+                ->withErrors(['email' => __('We were unable to send the password reset email. Please try again later.')]);
+        }
 
         if ($status === Password::RESET_LINK_SENT) {
             return back()->with('status', __($status));

@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\DepositController as AdminDepositController;
 use App\Http\Controllers\Admin\DepositMethodController as AdminDepositMethodController;
 use App\Http\Controllers\Admin\InvestmentController as AdminInvestmentController;
 use App\Http\Controllers\Admin\InvestmentPlanController as AdminPlanController;
+use App\Http\Controllers\Admin\TradeController as AdminTradeController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Admin\WithdrawalController as AdminWithdrawalController;
@@ -128,6 +129,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         // Investments
         Route::get('/investments', [AdminInvestmentController::class, 'index'])->name('investments.index');
         Route::post('/investments/{investment}/payout', [AdminInvestmentController::class, 'payout'])->name('investments.payout');
+        Route::post('/investments/{investment}/profit', [AdminInvestmentController::class, 'adjustProfit'])->name('investments.profit');
+
+        // Trades / positions (stocks, forex, crypto)
+        Route::get('/trades/{market}', [AdminTradeController::class, 'index'])->name('trades.index');
+        Route::post('/trades/{trade}/profit', [AdminTradeController::class, 'adjustProfit'])->name('trades.profit');
+        Route::post('/trades/{trade}/close', [AdminTradeController::class, 'close'])->name('trades.close');
+        Route::delete('/trades/{trade}', [AdminTradeController::class, 'destroy'])->name('trades.destroy');
 
         // Transactions
         Route::get('/transactions', [AdminTransactionController::class, 'index'])->name('transactions.index');

@@ -49,6 +49,14 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * @return HasMany<Trade, $this>
+     */
+    public function trades(): HasMany
+    {
+        return $this->hasMany(Trade::class)->latest();
+    }
+
+    /**
      * @return HasMany<Transaction, $this>
      */
     public function transactions(): HasMany

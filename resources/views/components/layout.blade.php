@@ -34,6 +34,7 @@
 
     @include('partials.footer')
     @include('partials.translator')
+    @include('partials.toasts')
 
 </body>
 </html>

@@ -108,19 +108,11 @@
     </div>
 
     <main class="mx-auto max-w-7xl px-5 py-8 sm:px-6 lg:px-8">
-        @if (session('status'))
-            <div class="reveal mb-6 rounded-2xl border border-emerald/30 bg-emerald/10 px-5 py-4 text-sm font-medium text-emerald">{{ session('status') }}</div>
-        @endif
-        @if ($errors->any())
-            <div class="reveal mb-6 rounded-2xl border border-rose-400/30 bg-rose-400/10 px-5 py-4 text-sm font-medium text-rose-300">
-                {{ $errors->first() }}
-            </div>
-        @endif
-
         {{ $slot }}
     </main>
 
     @include('partials.translator')
+    @include('partials.toasts')
 
 </body>
 </html>

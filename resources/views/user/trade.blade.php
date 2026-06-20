@@ -50,6 +50,38 @@
         </div>
     </div>
 
+    {{-- Open positions --}}
+    @if ($positions->isNotEmpty())
+        <h2 class="reveal mt-10 text-xl font-bold">Your {{ $config['title'] }} positions</h2>
+        <div class="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            @foreach ($positions as $position)
+                @php $pl = (float) $position->profit; @endphp
+                <div class="reveal flex flex-col rounded-3xl glass p-5" data-delay="{{ ($loop->index % 3) * 60 }}">
+                    <div class="flex items-center justify-between">
+                        <div class="min-w-0">
+                            <p class="font-bold leading-tight">{{ $position->symbol }}</p>
+                            <p class="truncate text-xs text-white/50">{{ $position->name ?? 'Open position' }}</p>
+                        </div>
+                        <span class="rounded-full bg-emerald/15 px-2.5 py-1 text-xs font-semibold text-emerald">Open</span>
+                    </div>
+                    <div class="mt-4 flex items-end justify-between">
+                        <div>
+                            <p class="text-xs text-white/45">Invested</p>
+                            <p class="text-lg font-bold tabular-nums">${{ number_format((float) $position->amount, 2) }}</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-xs text-white/45">Profit / loss</p>
+                            <p class="text-lg font-bold tabular-nums {{ $pl >= 0 ? 'text-emerald' : 'text-rose-400' }}">{{ $pl >= 0 ? '+' : '-' }}${{ number_format(abs($pl), 2) }}</p>
+                        </div>
+                    </div>
+                    <div class="mt-3 border-t border-white/10 pt-3 text-sm text-white/60">
+                        Current value <span class="float-right font-bold text-white tabular-nums">${{ number_format($position->currentValue(), 2) }}</span>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+    @endif
+
     {{-- Asset list with trade forms --}}
     <h2 class="reveal mt-10 text-xl font-bold">Markets</h2>
     <div class="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">

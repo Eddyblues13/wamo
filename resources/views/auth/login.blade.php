@@ -10,10 +10,6 @@
                     <p class="mt-2 text-sm text-white/55">Sign in to continue investing.</p>
                 </div>
 
-                @if (session('status'))
-                    <div class="mt-6 rounded-2xl border border-emerald/30 bg-emerald/10 px-4 py-3 text-sm text-emerald">{{ session('status') }}</div>
-                @endif
-
                 <form action="{{ route('login') }}" method="post" class="mt-8 space-y-4">
                     @csrf
                     <div>

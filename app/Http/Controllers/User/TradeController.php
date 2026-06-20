@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\NotificationMail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
@@ -97,7 +98,22 @@ class TradeController extends Controller
             'user' => $request->user(),
             'market' => $market,
             'config' => $this->markets()[$market],
+            'positions' => $request->user()->trades()->market($market)->open()->get(),
         ]);
+    }
+
+    /**
+     * Resolve a human-readable asset name from the market configuration.
+     */
+    protected function assetName(string $market, string $symbol): ?string
+    {
+        foreach ($this->markets()[$market]['assets'] as $asset) {
+            if (strtoupper($asset[0]) === strtoupper($symbol)) {
+                return $asset[1];
+            }
+        }
+
+        return null;
     }
 
     public function store(Request $request): RedirectResponse
@@ -118,7 +134,19 @@ class TradeController extends Controller
         }
 
         $symbol = strtoupper($validated['symbol']);
-        $user->debit($amount, 'trade', "Bought \${$amount} of {$symbol}");
+
+        DB::transaction(function () use ($user, $validated, $symbol, $amount): void {
+            $user->debit($amount, 'trade', "Bought \${$amount} of {$symbol}");
+
+            $user->trades()->create([
+                'market' => $validated['market'],
+                'symbol' => $symbol,
+                'name' => $this->assetName($validated['market'], $symbol),
+                'amount' => $amount,
+                'profit' => 0,
+                'status' => 'open',
+            ]);
+        });
 
         NotificationMail::deliver(
             $user,

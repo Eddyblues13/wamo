@@ -28,14 +28,25 @@
                             <td data-label="Status" class="px-6 py-4 text-center">
                                 <span class="rounded-full px-2.5 py-1 text-xs font-semibold capitalize {{ $inv->status === 'active' ? 'bg-emerald/15 text-emerald' : 'bg-white/10 text-white/55' }}">{{ $inv->status }}</span>
                             </td>
-                            <td data-label="Action" class="px-6 py-4 text-right">
+                            <td data-label="Action" class="px-6 py-4">
                                 @if ($inv->status === 'active')
-                                    <form action="{{ route('admin.investments.payout', $inv) }}" method="post" onsubmit="return confirm('Pay out principal + return now and complete this investment?')">
-                                        @csrf
-                                        <button type="submit" class="text-sm font-semibold text-brand-bright hover:underline">Pay out</button>
-                                    </form>
+                                    <div class="flex flex-col items-stretch gap-2 sm:flex-row sm:items-center sm:justify-end">
+                                        <form action="{{ route('admin.investments.profit', $inv) }}" method="post" class="flex items-center gap-2">
+                                            @csrf
+                                            <div class="flex items-center rounded-xl bg-white/5 px-2 ring-1 ring-white/10 focus-within:ring-brand-bright">
+                                                <span class="text-white/40">$</span>
+                                                <input type="number" name="profit" step="0.01" placeholder="0.00" required
+                                                       class="w-24 bg-transparent py-1.5 pl-1 text-sm font-semibold text-white outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none">
+                                            </div>
+                                            <button type="submit" class="rounded-xl bg-brand/20 px-3 py-1.5 text-xs font-bold text-brand-bright transition hover:bg-brand/30">Add profit</button>
+                                        </form>
+                                        <form action="{{ route('admin.investments.payout', $inv) }}" method="post" onsubmit="return confirm('Pay out principal + return now and complete this investment?')">
+                                            @csrf
+                                            <button type="submit" class="w-full rounded-xl bg-emerald/15 px-3 py-1.5 text-xs font-bold text-emerald transition hover:bg-emerald/25 sm:w-auto">Pay out</button>
+                                        </form>
+                                    </div>
                                 @else
-                                    <span class="text-xs text-white/30">—</span>
+                                    <span class="block text-right text-xs text-white/30">—</span>
                                 @endif
                             </td>
                         </tr>

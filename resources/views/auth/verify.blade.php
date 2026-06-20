@@ -11,10 +11,6 @@
                     <p class="mt-2 text-sm text-white/55">We sent a 4-digit code to<br><span class="font-semibold text-white/80">{{ auth()->user()->email }}</span></p>
                 </div>
 
-                @if (session('status'))
-                    <div class="mt-6 rounded-2xl border border-emerald/30 bg-emerald/10 px-4 py-3 text-center text-sm text-emerald">{{ session('status') }}</div>
-                @endif
-
                 @if (session('dev_code'))
                     <div class="mt-6 rounded-2xl border border-amber-400/30 bg-amber-400/10 px-4 py-3 text-center text-sm text-amber-300">
                         <span class="font-semibold">Local dev:</span> your code is <span class="font-mono text-lg tracking-widest">{{ session('dev_code') }}</span>

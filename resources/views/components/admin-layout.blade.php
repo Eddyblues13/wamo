@@ -8,6 +8,9 @@
         ['label' => 'Users', 'route' => 'admin.users.index', 'pattern' => 'admin.users.*', 'icon' => '👥'],
         ['label' => 'Plans', 'route' => 'admin.plans.index', 'pattern' => 'admin.plans.*', 'icon' => '💼'],
         ['label' => 'Investments', 'route' => 'admin.investments.index', 'pattern' => 'admin.investments.*', 'icon' => '📈'],
+        ['label' => 'Stocks', 'route' => 'admin.trades.index', 'params' => ['market' => 'stocks'], 'active' => 'stocks', 'icon' => '🏦'],
+        ['label' => 'Forex', 'route' => 'admin.trades.index', 'params' => ['market' => 'forex'], 'active' => 'forex', 'icon' => '💱'],
+        ['label' => 'Crypto', 'route' => 'admin.trades.index', 'params' => ['market' => 'crypto'], 'active' => 'crypto', 'icon' => '🪙'],
         ['label' => 'Deposits', 'route' => 'admin.deposits.index', 'pattern' => 'admin.deposits.*', 'icon' => '⬇️'],
         ['label' => 'Withdrawals', 'route' => 'admin.withdrawals.index', 'pattern' => 'admin.withdrawals.*', 'icon' => '⬆️'],
         ['label' => 'Deposit Methods', 'route' => 'admin.deposit-methods.index', 'pattern' => 'admin.deposit-methods.*', 'icon' => '🏧'],
@@ -37,8 +40,13 @@
 
             <nav class="flex flex-1 flex-col gap-1 px-3 py-2">
                 @foreach ($adminNav as $item)
-                    <a href="{{ route($item['route']) }}"
-                       class="flex items-center gap-3 rounded-2xl px-4 py-2.5 text-sm font-medium transition {{ request()->routeIs($item['pattern']) ? 'bg-white/10 text-white' : 'text-white/65 hover:bg-white/5 hover:text-white' }}">
+                    @php
+                        $isActive = isset($item['active'])
+                            ? (request()->routeIs($item['route']) && request()->route('market') === $item['active'])
+                            : request()->routeIs($item['pattern']);
+                    @endphp
+                    <a href="{{ route($item['route'], $item['params'] ?? []) }}"
+                       class="flex items-center gap-3 rounded-2xl px-4 py-2.5 text-sm font-medium transition {{ $isActive ? 'bg-white/10 text-white' : 'text-white/65 hover:bg-white/5 hover:text-white' }}">
                         <span>{{ $item['icon'] }}</span>{{ $item['label'] }}
                     </a>
                 @endforeach
@@ -78,13 +86,6 @@
                 {{-- Mobile page title --}}
                 <h1 class="mb-5 text-xl font-black tracking-tight lg:hidden">{{ $title }}</h1>
 
-                @if (session('status'))
-                    <div class="mb-6 rounded-2xl border border-emerald/30 bg-emerald/10 px-5 py-4 text-sm font-medium text-emerald">{{ session('status') }}</div>
-                @endif
-                @if ($errors->any())
-                    <div class="mb-6 rounded-2xl border border-rose-400/30 bg-rose-400/10 px-5 py-4 text-sm font-medium text-rose-300">{{ $errors->first() }}</div>
-                @endif
-
                 {{ $slot }}
             </main>
         </div>
@@ -107,7 +108,12 @@
 
             <nav class="flex flex-1 flex-col justify-center gap-1 px-6">
                 @foreach ($adminNav as $item)
-                    <a href="{{ route($item['route']) }}" class="nav-item flex items-center justify-between border-b border-white/5 py-4 text-xl font-bold {{ request()->routeIs($item['pattern']) ? 'text-gradient' : 'text-white/85' }}">
+                    @php
+                        $isActive = isset($item['active'])
+                            ? (request()->routeIs($item['route']) && request()->route('market') === $item['active'])
+                            : request()->routeIs($item['pattern']);
+                    @endphp
+                    <a href="{{ route($item['route'], $item['params'] ?? []) }}" class="nav-item flex items-center justify-between border-b border-white/5 py-4 text-xl font-bold {{ $isActive ? 'text-gradient' : 'text-white/85' }}">
                         <span class="flex items-center gap-3"><span class="text-base">{{ $item['icon'] }}</span>{{ $item['label'] }}</span>
                         <svg class="h-5 w-5 text-white/25" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="m9 6 6 6-6 6"/></svg>
                     </a>
@@ -123,6 +129,8 @@
             </div>
         </div>
     </div>
+
+    @include('partials.toasts')
 
 </body>
 </html>

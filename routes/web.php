@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\InvestmentController as AdminInvestmentController
 use App\Http\Controllers\Admin\InvestmentPlanController as AdminPlanController;
 use App\Http\Controllers\Admin\TransactionController as AdminTransactionController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\WithdrawalController as AdminWithdrawalController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -135,6 +136,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/deposits', [AdminDepositController::class, 'index'])->name('deposits.index');
         Route::post('/deposits/{deposit}/approve', [AdminDepositController::class, 'approve'])->name('deposits.approve');
         Route::post('/deposits/{deposit}/reject', [AdminDepositController::class, 'reject'])->name('deposits.reject');
+
+        // Withdrawal requests (approval queue)
+        Route::get('/withdrawals', [AdminWithdrawalController::class, 'index'])->name('withdrawals.index');
+        Route::post('/withdrawals/{withdrawal}/approve', [AdminWithdrawalController::class, 'approve'])->name('withdrawals.approve');
+        Route::post('/withdrawals/{withdrawal}/reject', [AdminWithdrawalController::class, 'reject'])->name('withdrawals.reject');
 
         // Deposit methods (crypto wallets / bank accounts)
         Route::resource('deposit-methods', AdminDepositMethodController::class)->except(['show']);

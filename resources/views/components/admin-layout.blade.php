@@ -9,6 +9,7 @@
         ['label' => 'Plans', 'route' => 'admin.plans.index', 'pattern' => 'admin.plans.*', 'icon' => '💼'],
         ['label' => 'Investments', 'route' => 'admin.investments.index', 'pattern' => 'admin.investments.*', 'icon' => '📈'],
         ['label' => 'Deposits', 'route' => 'admin.deposits.index', 'pattern' => 'admin.deposits.*', 'icon' => '⬇️'],
+        ['label' => 'Withdrawals', 'route' => 'admin.withdrawals.index', 'pattern' => 'admin.withdrawals.*', 'icon' => '⬆️'],
         ['label' => 'Deposit Methods', 'route' => 'admin.deposit-methods.index', 'pattern' => 'admin.deposit-methods.*', 'icon' => '🏧'],
         ['label' => 'Transactions', 'route' => 'admin.transactions.index', 'pattern' => 'admin.transactions.*', 'icon' => '💳'],
     ];

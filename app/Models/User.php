@@ -65,6 +65,30 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     /**
+     * @return HasMany<WithdrawalRequest, $this>
+     */
+    public function withdrawalRequests(): HasMany
+    {
+        return $this->hasMany(WithdrawalRequest::class)->latest();
+    }
+
+    /**
+     * Funds reserved by pending withdrawal requests not yet approved.
+     */
+    public function pendingWithdrawalsTotal(): float
+    {
+        return (float) $this->withdrawalRequests()->where('status', 'pending')->sum('amount');
+    }
+
+    /**
+     * Balance that can still be withdrawn, excluding funds tied up in pending requests.
+     */
+    public function availableForWithdrawal(): float
+    {
+        return max(0.0, (float) $this->balance - $this->pendingWithdrawalsTotal());
+    }
+
+    /**
      * Add funds to the wallet and record a ledger entry, atomically.
      */
     public function credit(float $amount, string $type, ?string $description = null): Transaction

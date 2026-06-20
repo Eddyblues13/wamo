@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Mail\NotificationMail;
 use App\Models\DepositMethod;
 use App\Models\DepositRequest;
+use App\Models\WithdrawalRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
@@ -34,7 +35,8 @@ class WalletController extends Controller
     {
         return view('user.withdraw', [
             'user' => $request->user(),
-            'recent' => $request->user()->transactions()->where('type', 'withdrawal')->take(5)->get(),
+            'recent' => $request->user()->withdrawalRequests()->take(6)->get(),
+            'available' => $request->user()->availableForWithdrawal(),
         ]);
     }
 
@@ -88,33 +90,51 @@ class WalletController extends Controller
     {
         $validated = $request->validate([
             'amount' => ['required', 'numeric', 'min:10'],
-            'method' => ['nullable', 'string', 'max:60'],
+            'method' => ['required', 'in:bank,crypto'],
+            'account_name' => ['required_if:method,bank', 'nullable', 'string', 'max:120'],
+            'bank_name' => ['required_if:method,bank', 'nullable', 'string', 'max:120'],
+            'account_number' => ['required_if:method,bank', 'nullable', 'string', 'max:60'],
+            'swift_code' => ['required_if:method,bank', 'nullable', 'string', 'max:60'],
+            'crypto_network' => ['required_if:method,crypto', 'nullable', 'string', 'max:60'],
+            'wallet_address' => ['required_if:method,crypto', 'nullable', 'string', 'max:191'],
         ]);
 
-        $amount = (float) $validated['amount'];
+        $user = $request->user();
+        $amount = round((float) $validated['amount'], 2);
 
-        if ($amount > (float) $request->user()->balance) {
+        if ($amount > $user->availableForWithdrawal()) {
             throw ValidationException::withMessages([
-                'amount' => 'You cannot withdraw more than your available balance.',
+                'amount' => 'This amount exceeds the funds available for withdrawal. You may have a pending request already.',
             ]);
         }
 
-        $method = $validated['method'] ?? 'Bank transfer';
-        $user = $request->user();
-        $user->debit($amount, 'withdrawal', "Withdrawal · {$method}");
+        $withdrawal = WithdrawalRequest::create([
+            'user_id' => $user->id,
+            'method' => $validated['method'],
+            'amount' => $amount,
+            'account_name' => $validated['account_name'] ?? null,
+            'bank_name' => $validated['bank_name'] ?? null,
+            'account_number' => $validated['account_number'] ?? null,
+            'swift_code' => $validated['swift_code'] ?? null,
+            'crypto_network' => $validated['crypto_network'] ?? null,
+            'wallet_address' => $validated['wallet_address'] ?? null,
+            'status' => 'pending',
+        ]);
 
         NotificationMail::deliver(
             $user,
-            'Withdrawal processed',
-            'Your withdrawal is on its way',
-            ['Your withdrawal request has been processed successfully.'],
+            'Withdrawal request received',
+            'Your withdrawal is pending review',
+            ['We have received your withdrawal request. It is now pending approval by our team.'],
             [
                 'Amount' => '$'.number_format($amount, 2),
-                'Destination' => $method,
-                'Remaining balance' => '$'.number_format((float) $user->balance, 2),
+                'Destination' => $withdrawal->methodLabel(),
+                'Status' => 'Pending',
             ],
+            'Your funds remain in your wallet until the request is approved. You will be notified once it is processed.',
         );
 
-        return redirect()->route('user.withdraw')->with('status', 'Your withdrawal has been processed.');
+        return redirect()->route('user.withdraw')
+            ->with('status', 'Your withdrawal request has been submitted and is pending approval.');
     }
 }

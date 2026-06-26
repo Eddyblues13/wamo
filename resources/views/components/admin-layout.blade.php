@@ -1,5 +1,5 @@
 @props([
-    'title' => 'Admin — Wamo',
+    'title' => 'Admin — Fintriva',
 ])
 
 @php

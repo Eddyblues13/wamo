@@ -8,7 +8,7 @@
 <body style="margin:0;background:#0b0f1a;font-family:Helvetica,Arial,sans-serif;color:#e8ecf5;">
     <div style="max-width:520px;margin:0 auto;padding:40px 24px;">
         <div style="text-align:center;margin-bottom:26px;">
-            <span style="font-size:22px;font-weight:800;color:#ffffff;">Wamo</span><span style="font-size:22px;font-weight:800;color:#8ab4ff;"> International</span>
+            <span style="font-size:22px;font-weight:800;color:#ffffff;">Fintriva</span><span style="font-size:22px;font-weight:800;color:#8ab4ff;"> International</span>
         </div>
 
         <div style="background:#121726;border:1px solid #232a3d;border-radius:20px;padding:32px;">
@@ -42,7 +42,7 @@
         </div>
 
         <p style="text-align:center;margin:24px 0 0;font-size:12px;line-height:1.7;color:#5f6982;">
-            © {{ date('Y') }} Wamo International. Investing involves risk. Capital at risk.<br>
+            © {{ date('Y') }} Fintriva International. Investing involves risk. Capital at risk.<br>
             This is an automated message — please do not reply.
         </p>
     </div>

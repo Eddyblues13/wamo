@@ -46,8 +46,8 @@ class DepositMethodSeeder extends Seeder
             ['type' => 'bank', 'name' => 'Bank Transfer'],
             [
                 'icon' => '🏦',
-                'bank_name' => 'Wamo Financial (Demo Bank)',
-                'account_name' => 'Wamo Holdings Ltd',
+                'bank_name' => 'Fintriva Financial (Demo Bank)',
+                'account_name' => 'Fintriva Holdings Ltd',
                 'account_number' => '0123456789',
                 'instructions' => 'Transfer to the account above and enter your transfer reference. Funds credited after confirmation.',
                 'min_amount' => 50,

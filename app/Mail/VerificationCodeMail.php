@@ -20,7 +20,7 @@ class VerificationCodeMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Your Wamo verification code',
+            subject: 'Your Fintriva verification code',
         );
     }
 

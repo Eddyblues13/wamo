@@ -3,7 +3,7 @@
      Renders one error toast per validation message. --}}
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
 <style>
-    /* Theme toastr to match Wamo's dark glass UI */
+    /* Theme toastr to match Fintriva's dark glass UI */
     #toast-container > div {
         opacity: 1;
         border-radius: 1rem;

@@ -11,7 +11,7 @@
 
 <header data-nav class="fixed inset-x-0 top-0 z-50">
     <nav class="mx-auto flex max-w-7xl items-center justify-between px-5 py-3.5 lg:px-8">
-        <a href="{{ route('home') }}" aria-label="Wamo home">
+        <a href="{{ route('home') }}" aria-label="Fintriva home">
             <x-logo />
         </a>
 
@@ -40,7 +40,7 @@
 
             {{-- top bar --}}
             <div class="flex items-center justify-between px-5 py-3.5">
-                <a href="{{ route('home') }}" aria-label="Wamo home">
+                <a href="{{ route('home') }}" aria-label="Fintriva home">
                     <x-logo />
                 </a>
                 <button data-nav-close class="grid h-11 w-11 place-items-center rounded-2xl glass transition active:scale-95" aria-label="Close menu">

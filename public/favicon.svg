@@ -1,12 +1,12 @@
 <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
     <defs>
-        <linearGradient id="wamoFav" x1="2" y1="2" x2="38" y2="38" gradientUnits="userSpaceOnUse">
+        <linearGradient id="fintrivaFav" x1="2" y1="2" x2="38" y2="38" gradientUnits="userSpaceOnUse">
             <stop stop-color="#5B8CFF"/>
             <stop offset="0.55" stop-color="#7C5CFF"/>
             <stop offset="1" stop-color="#B254FF"/>
         </linearGradient>
     </defs>
-    <rect x="1.5" y="1.5" width="37" height="37" rx="11" fill="url(#wamoFav)"/>
+    <rect x="1.5" y="1.5" width="37" height="37" rx="11" fill="url(#fintrivaFav)"/>
     <path d="M9 24.5 L14.5 29 L20 18.5 L25.5 27 L31 11.5" stroke="#ffffff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
     <circle cx="31" cy="11.5" r="2.7" fill="#3FE0A8"/>
 </svg>

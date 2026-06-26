@@ -9,20 +9,20 @@ class AdminSeeder extends Seeder
 {
     public function run(): void
     {
-        $email = 'admin@wamo.com';
+        $email = 'admin@fintriva.com';
         $password = 'password';
 
         Admin::updateOrCreate(
             ['email' => $email],
             [
-                'name' => 'Wamo Admin',
+                'name' => 'Fintriva Admin',
                 'password' => $password,
                 'role' => 'super',
             ],
         );
 
         $this->command?->info('Admin account ready:');
-        $this->command?->line("  URL:      /admin/login");
+        $this->command?->line('  URL:      /admin/login');
         $this->command?->line("  Email:    {$email}");
         $this->command?->line("  Password: {$password}");
     }

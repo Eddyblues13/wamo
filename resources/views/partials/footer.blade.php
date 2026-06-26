@@ -25,7 +25,7 @@
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
         <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-5">
             <div class="lg:col-span-2">
-                <a href="{{ route('home') }}" aria-label="Wamo home">
+                <a href="{{ route('home') }}" aria-label="Fintriva home">
                     <x-logo />
                 </a>
                 <p class="mt-4 max-w-sm text-sm text-white/50">The modern wealth platform for crypto, stocks, real estate and forex. Invest with confidence.</p>
@@ -42,7 +42,7 @@
             @endforeach
         </div>
         <div class="mt-12 flex flex-col items-center justify-between gap-4 border-t border-white/5 pt-8 text-sm text-white/40 sm:flex-row">
-            <p>© {{ date('Y') }} Wamo. All rights reserved.</p>
+            <p>© {{ date('Y') }} Fintriva. All rights reserved.</p>
             <p>Investing involves risk. Capital at risk.</p>
         </div>
     </div>

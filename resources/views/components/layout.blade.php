@@ -1,6 +1,6 @@
 @props([
-    'title' => 'Wamo — Invest in Crypto, Tesla, Stocks & Forex',
-    'description' => 'Wamo is the modern wealth platform to invest in crypto, Tesla & global stocks, real estate and trade forex — all from one secure, professional dashboard.',
+    'title' => 'Fintriva — Invest in Crypto, Tesla, Stocks & Forex',
+    'description' => 'Fintriva is the modern wealth platform to invest in crypto, Tesla & global stocks, real estate and trade forex — all from one secure, professional dashboard.',
 ])
 
 <!DOCTYPE html>

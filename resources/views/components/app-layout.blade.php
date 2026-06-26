@@ -1,5 +1,5 @@
 @props([
-    'title' => 'Dashboard — Wamo',
+    'title' => 'Dashboard — Fintriva',
 ])
 
 @php
@@ -44,7 +44,7 @@
     {{-- Navbar --}}
     <header data-nav class="sticky top-0 z-50 border-b border-white/10 bg-ink-950/70 backdrop-blur-xl">
         <div class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3.5 lg:px-8">
-            <a href="{{ route('user.dashboard') }}" aria-label="Wamo dashboard"><x-logo /></a>
+            <a href="{{ route('user.dashboard') }}" aria-label="Fintriva dashboard"><x-logo /></a>
 
             {{-- desktop nav --}}
             <nav class="hidden items-center gap-6 lg:flex">

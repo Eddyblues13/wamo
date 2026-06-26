@@ -1,4 +1,4 @@
-<x-layout title="Create account — Wamo" description="Open a free Wamo account and start investing in minutes.">
+<x-layout title="Create account — Fintriva" description="Open a free Fintriva account and start investing in minutes.">
 
     <section class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-32">
         <div class="absolute inset-0 -z-10 bg-grid"></div>

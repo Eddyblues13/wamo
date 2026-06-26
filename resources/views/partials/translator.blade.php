@@ -92,15 +92,15 @@
             paintLabel(name);
             if (code === 'en') {
                 setCookie('/en/en');
-                localStorage.removeItem('wamo_lang');
-                localStorage.removeItem('wamo_lang_name');
+                localStorage.removeItem('fintriva_lang');
+                localStorage.removeItem('fintriva_lang_name');
                 location.reload();
                 return;
             }
             setCookie('/en/' + code);
             translateTo(code);
-            localStorage.setItem('wamo_lang', code);
-            localStorage.setItem('wamo_lang_name', name);
+            localStorage.setItem('fintriva_lang', code);
+            localStorage.setItem('fintriva_lang_name', name);
         }
 
         function makeButton(code, native) {
@@ -172,8 +172,8 @@
             menu.addEventListener('click', (e) => e.stopPropagation());
             document.addEventListener('click', () => menu.classList.add('hidden'));
 
-            const saved = localStorage.getItem('wamo_lang');
-            const savedName = localStorage.getItem('wamo_lang_name');
+            const saved = localStorage.getItem('fintriva_lang');
+            const savedName = localStorage.getItem('fintriva_lang_name');
             if (saved && saved !== 'en') {
                 if (savedName) paintLabel(savedName);
                 translateTo(saved);

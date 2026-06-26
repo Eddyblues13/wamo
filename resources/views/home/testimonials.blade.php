@@ -1,12 +1,12 @@
 {{-- ============ TESTIMONIALS ============ --}}
 <section id="testimonials" class="py-24">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <x-section-heading title="Trusted by investors worldwide" subtitle="Individuals and professionals rely on Wamo to manage and grow their portfolios." />
+        <x-section-heading title="Trusted by investors worldwide" subtitle="Individuals and professionals rely on Fintriva to manage and grow their portfolios." />
 
         <div class="mt-16 grid gap-6 lg:grid-cols-3">
             @php
                 $reviews = [
-                    ['Sophia Adeyemi', 'Private investor', 'Wamo lets me manage cryptocurrency and equities side by side in a single, clear portfolio. The reporting is genuinely excellent.'],
+                    ['Sophia Adeyemi', 'Private investor', 'Fintriva lets me manage cryptocurrency and equities side by side in a single, clear portfolio. The reporting is genuinely excellent.'],
                     ['Daniel Okafor', 'Foreign exchange trader', 'Tight spreads, reliable execution and professional charting. I trade currencies daily and the platform has never let me down.'],
                     ['Amara Bello', 'Long-term investor', 'I allocated to a managed portfolio and it rebalances automatically. It has been the most considered financial decision I made this year.'],
                 ];

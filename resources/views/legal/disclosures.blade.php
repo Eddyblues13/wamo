@@ -1,5 +1,5 @@
 <x-legal heading="Disclosures" updated="June 2026">
-    <p>The information on Wamo is provided for general informational purposes only and does not constitute investment, financial, legal or tax advice. You should consider your own circumstances and seek professional advice before investing.</p>
+    <p>The information on Fintriva is provided for general informational purposes only and does not constitute investment, financial, legal or tax advice. You should consider your own circumstances and seek professional advice before investing.</p>
 
     <div>
         <h2>Investment risk</h2>

@@ -1,5 +1,5 @@
 <x-legal heading="Privacy Policy" updated="June 2026">
-    <p>This Privacy Policy explains how Wamo ("we", "us") collects, uses and protects your personal information when you use our platform. By using Wamo, you agree to the practices described here.</p>
+    <p>This Privacy Policy explains how Fintriva ("we", "us") collects, uses and protects your personal information when you use our platform. By using Fintriva, you agree to the practices described here.</p>
 
     <div>
         <h2>Information we collect</h2>

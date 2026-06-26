@@ -1,4 +1,4 @@
-<x-app-layout title="Deposit — Wamo">
+<x-app-layout title="Deposit — Fintriva">
 
     @php
         $typeMeta = [

@@ -2,4 +2,4 @@
     code="503"
     emoji="🚧"
     title="We'll be right back"
-    message="Wamo is undergoing brief scheduled maintenance to make things even better. Please check back in a few minutes." />
+    message="Fintriva is undergoing brief scheduled maintenance to make things even better. Please check back in a few minutes." />

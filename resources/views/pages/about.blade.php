@@ -1,4 +1,4 @@
-<x-layout title="About — Wamo" description="Wamo is on a mission to make professional-grade investing accessible to everyone, everywhere.">
+<x-layout title="About — Fintriva" description="Fintriva is on a mission to make professional-grade investing accessible to everyone, everywhere.">
 
     <x-page-hero
         eyebrow="About us"
@@ -21,7 +21,7 @@
             <x-section-heading title="Our mission" />
             <p class="reveal mt-6 text-lg leading-relaxed text-white/65">
                 For too long, the best investment tools were locked behind high minimums, opaque fees and intimidating jargon.
-                Wamo tears down those walls. We bring crypto, global stocks, forex and real estate into one beautifully simple
+                Fintriva tears down those walls. We bring crypto, global stocks, forex and real estate into one beautifully simple
                 app — with bank-grade security and zero hidden costs — so anyone can build wealth with confidence.
             </p>
         </div>

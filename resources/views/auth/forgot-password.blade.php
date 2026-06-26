@@ -1,4 +1,4 @@
-<x-layout title="Reset password — Wamo" description="Reset your Wamo account password.">
+<x-layout title="Reset password — Fintriva" description="Reset your Fintriva account password.">
 
     <section class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-32">
         <div class="absolute inset-0 -z-10 bg-grid"></div>

@@ -1,4 +1,4 @@
-<x-app-layout title="Invest — Wamo">
+<x-app-layout title="Invest — Fintriva">
 
     <div class="reveal">
         <h1 class="text-2xl font-black tracking-tight sm:text-3xl">Investment plans</h1>

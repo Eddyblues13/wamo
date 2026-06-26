@@ -1,9 +1,9 @@
-<x-layout title="Blog — Wamo" description="Insights on investing, crypto, stocks and forex from the Wamo team.">
+<x-layout title="Blog — Fintriva" description="Insights on investing, crypto, stocks and forex from the Fintriva team.">
 
     <x-page-hero
         eyebrow="Blog"
         title='Insights to <span class="text-gradient">invest smarter</span>'
-        subtitle="Guides, market analysis and product news from the Wamo team." />
+        subtitle="Guides, market analysis and product news from the Fintriva team." />
 
     <section class="py-16">
         <div class="mx-auto max-w-7xl px-6 lg:px-8">
@@ -15,7 +15,7 @@
                         ['Stocks', 'Why fractional shares changed investing', 'Own a piece of Tesla or Amazon without buying a whole share.', 'https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?auto=format&fit=crop&w=900&q=80'],
                         ['Forex', 'Managing risk with leverage', 'Use leverage responsibly with these five practical rules.', 'https://images.unsplash.com/photo-1535320903710-d993d3d77d29?auto=format&fit=crop&w=900&q=80'],
                         ['Markets', 'Reading the 2026 macro landscape', 'What rates, inflation and AI mean for your portfolio this year.', 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=900&q=80'],
-                        ['Product', "What's new in the Wamo app", 'A roundup of the latest features and improvements.', 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80'],
+                        ['Product', "What's new in the Fintriva app", 'A roundup of the latest features and improvements.', 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=900&q=80'],
                     ];
                 @endphp
                 @foreach ($posts as [$tag, $title, $excerpt, $img])

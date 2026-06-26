@@ -1,4 +1,4 @@
-<x-layout title="Sign in — Wamo" description="Sign in to your Wamo account.">
+<x-layout title="Sign in — Fintriva" description="Sign in to your Fintriva account.">
 
     <section class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-32">
         <div class="absolute inset-0 -z-10 bg-grid"></div>
@@ -32,7 +32,7 @@
                 </form>
 
                 <p class="mt-6 text-center text-sm text-white/55">
-                    New to Wamo? <a href="{{ route('register') }}" class="font-semibold text-brand-bright hover:underline">Create an account</a>
+                    New to Fintriva? <a href="{{ route('register') }}" class="font-semibold text-brand-bright hover:underline">Create an account</a>
                 </p>
             </div>
         </div>

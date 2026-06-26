@@ -1,4 +1,4 @@
-<x-layout title="Stocks & Tesla — Wamo" description="Buy fractional shares of Tesla, Amazon, Apple, Nvidia and thousands of global stocks, commission-free.">
+<x-layout title="Stocks & Tesla — Fintriva" description="Buy fractional shares of Tesla, Amazon, Apple, Nvidia and thousands of global stocks, commission-free.">
 
     <x-page-hero
         eyebrow="Stocks & Tesla"

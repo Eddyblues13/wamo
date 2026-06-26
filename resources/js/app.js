@@ -1,4 +1,4 @@
-// Wamo homepage interactions: scroll reveal, 3D tilt, animated counters, mobile nav.
+// Fintriva homepage interactions: scroll reveal, 3D tilt, animated counters, mobile nav.
 
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

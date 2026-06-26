@@ -1,5 +1,5 @@
 <x-legal heading="Terms of Service" updated="June 2026">
-    <p>These Terms of Service govern your access to and use of Wamo. By creating an account or using the platform, you agree to be bound by these terms.</p>
+    <p>These Terms of Service govern your access to and use of Fintriva. By creating an account or using the platform, you agree to be bound by these terms.</p>
 
     <div>
         <h2>Eligibility</h2>
@@ -23,7 +23,7 @@
 
     <div>
         <h2>Prohibited use</h2>
-        <p>You may not use Wamo for unlawful activity, market manipulation, money laundering, or to infringe the rights of others. We may suspend or terminate accounts that violate these terms.</p>
+        <p>You may not use Fintriva for unlawful activity, market manipulation, money laundering, or to infringe the rights of others. We may suspend or terminate accounts that violate these terms.</p>
     </div>
 
     <div>

@@ -1,4 +1,4 @@
-<x-layout title="Live Trading — Wamo" description="Trade crypto, stocks and forex with real-time charts, instant execution and pro tools.">
+<x-layout title="Live Trading — Fintriva" description="Trade crypto, stocks and forex with real-time charts, instant execution and pro tools.">
 
     <x-page-hero
         eyebrow="Live Trading"

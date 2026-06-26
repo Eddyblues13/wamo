@@ -1,11 +1,11 @@
-<x-layout title="Press — Wamo" description="Wamo press releases, media coverage and brand assets.">
+<x-layout title="Press — Fintriva" description="Fintriva press releases, media coverage and brand assets.">
 
     <x-page-hero
         eyebrow="Press"
-        title='Wamo in the <span class="text-gradient">news</span>'
+        title='Fintriva in the <span class="text-gradient">news</span>'
         subtitle="Latest announcements, media coverage and resources for journalists.">
         <x-slot:actions>
-            <a href="mailto:press@wamo.com" class="btn-glow rounded-full px-7 py-3.5 text-base font-semibold">Contact press team</a>
+            <a href="mailto:press@fintriva.com" class="btn-glow rounded-full px-7 py-3.5 text-base font-semibold">Contact press team</a>
         </x-slot:actions>
     </x-page-hero>
 
@@ -15,10 +15,10 @@
             <div class="mt-12 space-y-4">
                 @php
                     $releases = [
-                        ['Jun 2026', 'Wamo surpasses 240,000 active investors worldwide'],
-                        ['Apr 2026', 'Wamo launches tokenized real estate in 12 new markets'],
-                        ['Feb 2026', 'Wamo raises $85M Series B to expand global trading'],
-                        ['Nov 2025', 'Wamo introduces commission-free fractional stock trading'],
+                        ['Jun 2026', 'Fintriva surpasses 240,000 active investors worldwide'],
+                        ['Apr 2026', 'Fintriva launches tokenized real estate in 12 new markets'],
+                        ['Feb 2026', 'Fintriva raises $85M Series B to expand global trading'],
+                        ['Nov 2025', 'Fintriva introduces commission-free fractional stock trading'],
                     ];
                 @endphp
                 @foreach ($releases as [$date, $title])

@@ -1,4 +1,4 @@
-<x-layout title="Invest — Wamo" description="Build a diversified portfolio across crypto, stocks, forex, real estate and managed funds.">
+<x-layout title="Invest — Fintriva" description="Build a diversified portfolio across crypto, stocks, forex, real estate and managed funds.">
 
     <x-page-hero
         eyebrow="Invest"

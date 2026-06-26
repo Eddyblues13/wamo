@@ -20,7 +20,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Paginator::defaultView('vendor.pagination.wamo');
-        Paginator::defaultSimpleView('vendor.pagination.wamo');
+        Paginator::defaultView('vendor.pagination.fintriva');
+        Paginator::defaultSimpleView('vendor.pagination.fintriva');
     }
 }

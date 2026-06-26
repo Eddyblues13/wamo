@@ -1,4 +1,4 @@
-<x-app-layout title="Dashboard — Wamo">
+<x-app-layout title="Dashboard — Fintriva">
 
     {{-- Live ticker tape --}}
     <div class="reveal mb-8 overflow-hidden rounded-2xl glass">

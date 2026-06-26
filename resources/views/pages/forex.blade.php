@@ -1,4 +1,4 @@
-<x-layout title="Forex — Wamo" description="Trade 60+ currency pairs 24/5 with tight spreads, leverage and pro-grade charting.">
+<x-layout title="Forex — Fintriva" description="Trade 60+ currency pairs 24/5 with tight spreads, leverage and pro-grade charting.">
 
     <x-page-hero
         eyebrow="Forex"

@@ -3,10 +3,10 @@
     'iconClass' => 'h-9 w-9 drop-shadow-[0_6px_16px_rgba(124,92,255,0.35)]',
 ])
 
-@php $gid = 'wamo-'.\Illuminate\Support\Str::random(6); @endphp
+@php $gid = 'fintriva-'.\Illuminate\Support\Str::random(6); @endphp
 
 <span {{ $attributes->merge(['class' => 'inline-flex items-center gap-2.5']) }}>
-    <svg class="{{ $iconClass }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wamo">
+    <svg class="{{ $iconClass }}" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Fintriva">
         <defs>
             <linearGradient id="{{ $gid }}" x1="2" y1="2" x2="38" y2="38" gradientUnits="userSpaceOnUse">
                 <stop stop-color="#5B8CFF"/>
@@ -22,6 +22,6 @@
     </svg>
 
     @if ($wordmark)
-        <span class="text-xl font-bold tracking-tight">Wamo</span>
+        <span class="text-xl font-bold tracking-tight">Fintriva</span>
     @endif
 </span>

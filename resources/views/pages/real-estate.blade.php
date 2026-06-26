@@ -1,4 +1,4 @@
-<x-layout title="Real Estate — Wamo" description="Earn passive income from tokenized property portfolios across prime global cities.">
+<x-layout title="Real Estate — Fintriva" description="Earn passive income from tokenized property portfolios across prime global cities.">
 
     <x-page-hero
         eyebrow="Real Estate"

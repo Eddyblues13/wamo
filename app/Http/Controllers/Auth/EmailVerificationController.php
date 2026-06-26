@@ -59,10 +59,10 @@ class EmailVerificationController extends Controller
 
         NotificationMail::deliver(
             $user,
-            'Welcome to Wamo International',
+            'Welcome to Fintriva International',
             'Welcome aboard, '.$user->name.'!',
             [
-                'Your account is verified and ready to go. Welcome to Wamo International — the modern platform to invest in crypto, stocks, forex and more.',
+                'Your account is verified and ready to go. Welcome to Fintriva International — the modern platform to invest in crypto, stocks, forex and more.',
                 'Here’s how to get started:',
                 '1. Fund your wallet from the Deposit page.',
                 '2. Explore investment plans or trade stocks, forex and crypto.',

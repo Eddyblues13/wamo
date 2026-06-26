@@ -1,4 +1,4 @@
-<x-layout title="Crypto — Wamo" description="Buy, sell and stake Bitcoin, Ethereum and 200+ cryptocurrencies with rewards up to 9% APY.">
+<x-layout title="Crypto — Fintriva" description="Buy, sell and stake Bitcoin, Ethereum and 200+ cryptocurrencies with rewards up to 9% APY.">
 
     <x-page-hero
         eyebrow="Crypto"

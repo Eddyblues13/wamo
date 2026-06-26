@@ -1,4 +1,4 @@
-<x-layout title="Security — Wamo" description="How Wamo protects your money and data: insured custody, encryption and 24/7 monitoring.">
+<x-layout title="Security — Fintriva" description="How Fintriva protects your money and data: insured custody, encryption and 24/7 monitoring.">
 
     <x-page-hero
         eyebrow="Security"
@@ -23,8 +23,8 @@
         <div class="mx-auto max-w-3xl px-6 text-center lg:px-8">
             <div class="reveal rounded-3xl glass p-10">
                 <h2 class="text-2xl font-bold">Found a vulnerability?</h2>
-                <p class="mt-3 text-white/60">We run a responsible disclosure program and reward researchers who help keep Wamo safe.</p>
-                <a href="mailto:security@wamo.com" class="btn-glow mt-6 inline-flex rounded-full px-7 py-3 text-sm font-semibold">Report to security@wamo.com</a>
+                <p class="mt-3 text-white/60">We run a responsible disclosure program and reward researchers who help keep Fintriva safe.</p>
+                <a href="mailto:security@fintriva.com" class="btn-glow mt-6 inline-flex rounded-full px-7 py-3 text-sm font-semibold">Report to security@fintriva.com</a>
             </div>
         </div>
     </section>

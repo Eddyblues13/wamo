@@ -1,4 +1,4 @@
-<x-layout title="Careers — Wamo" description="Join Wamo and help build the future of investing. Remote-first, mission-driven.">
+<x-layout title="Careers — Fintriva" description="Join Fintriva and help build the future of investing. Remote-first, mission-driven.">
 
     <x-page-hero
         eyebrow="Careers"

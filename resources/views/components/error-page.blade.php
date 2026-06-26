@@ -10,7 +10,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $code ? $code.' — ' : '' }}Wamo</title>
+    <title>{{ $code ? $code.' — ' : '' }}Fintriva</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -46,7 +46,7 @@
             </div>
         </div>
 
-        <p class="mt-10 text-xs text-white/30">Need help? Contact <a href="mailto:support@wamointernational.com" class="text-white/50 hover:text-white">support@wamointernational.com</a></p>
+        <p class="mt-10 text-xs text-white/30">Need help? Contact <a href="mailto:support@fintrivainternational.com" class="text-white/50 hover:text-white">support@fintrivainternational.com</a></p>
     </main>
 
 </body>

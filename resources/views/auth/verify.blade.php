@@ -1,4 +1,4 @@
-<x-layout title="Verify your email — Wamo" description="Enter the 4-digit code we sent to your email.">
+<x-layout title="Verify your email — Fintriva" description="Enter the 4-digit code we sent to your email.">
 
     <section class="relative flex min-h-screen items-center justify-center overflow-hidden px-6 py-32">
         <div class="absolute inset-0 -z-10 bg-grid"></div>

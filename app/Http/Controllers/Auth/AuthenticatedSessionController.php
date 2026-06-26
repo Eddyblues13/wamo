@@ -37,9 +37,9 @@ class AuthenticatedSessionController extends Controller
 
         NotificationMail::deliver(
             $request->user(),
-            'New sign-in to your Wamo account',
+            'New sign-in to your Fintriva account',
             'New sign-in detected',
-            ['We noticed a new sign-in to your Wamo International account.'],
+            ['We noticed a new sign-in to your Fintriva International account.'],
             [
                 'Date & time' => Carbon::now()->format('M j, Y · g:i A'),
                 'IP address' => $request->ip(),

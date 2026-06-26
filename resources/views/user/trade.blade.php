@@ -1,4 +1,4 @@
-<x-app-layout :title="$config['title'].' — Wamo'">
+<x-app-layout :title="$config['title'].' — Fintriva'">
 
     @php $isCrypto = $market === 'crypto'; @endphp
 

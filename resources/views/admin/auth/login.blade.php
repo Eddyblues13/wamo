@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Admin Console — Wamo</title>
+    <title>Admin Console — Fintriva</title>
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -23,7 +23,7 @@
                     <svg class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 3l7 4v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V7l7-4z"/></svg>
                     Secured administration
                 </span>
-                <h1 class="mt-5 max-w-md text-4xl font-black leading-tight tracking-tight">The Wamo control center</h1>
+                <h1 class="mt-5 max-w-md text-4xl font-black leading-tight tracking-tight">The Fintriva control center</h1>
                 <p class="mt-4 max-w-sm text-white/55">Manage users, investments, deposits and platform operations from one secure console.</p>
 
                 <div class="mt-8 flex flex-wrap gap-x-8 gap-y-3 text-sm text-white/60">
@@ -33,7 +33,7 @@
                 </div>
             </div>
 
-            <p class="text-xs text-white/30">© {{ date('Y') }} Wamo International · Authorized personnel only</p>
+            <p class="text-xs text-white/30">© {{ date('Y') }} Fintriva International · Authorized personnel only</p>
         </div>
 
         {{-- Form panel --}}
@@ -54,7 +54,7 @@
                         <label for="email" class="mb-1.5 block text-xs font-medium text-white/50">Email</label>
                         <div class="flex items-center rounded-2xl bg-white/5 px-4 ring-1 ring-white/10 focus-within:ring-brand-bright">
                             <svg class="h-4 w-4 text-white/30" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8"><path stroke-linecap="round" stroke-linejoin="round" d="M3 7l9 6 9-6M4 5h16a1 1 0 011 1v12a1 1 0 01-1 1H4a1 1 0 01-1-1V6a1 1 0 011-1z"/></svg>
-                            <input id="email" name="email" type="email" required autofocus value="{{ old('email') }}" placeholder="admin@wamo.com" class="w-full bg-transparent py-3 pl-2 text-sm text-white outline-none">
+                            <input id="email" name="email" type="email" required autofocus value="{{ old('email') }}" placeholder="admin@fintriva.com" class="w-full bg-transparent py-3 pl-2 text-sm text-white outline-none">
                         </div>
                         @error('email')<p class="mt-1.5 text-xs text-rose-400">{{ $message }}</p>@enderror
                     </div>

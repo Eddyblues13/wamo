@@ -1,7 +1,7 @@
-{{-- ============ WHY WAMO (bento) ============ --}}
+{{-- ============ WHY FINTRIVA (bento) ============ --}}
 <section class="py-24">
     <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <x-section-heading eyebrow="Built for serious investors" title="Why investors choose Wamo" />
+        <x-section-heading eyebrow="Built for serious investors" title="Why investors choose Fintriva" />
 
         <div class="mt-14 grid auto-rows-[180px] grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {{-- Feature hero cell --}}

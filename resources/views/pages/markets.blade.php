@@ -1,4 +1,4 @@
-<x-layout title="Markets — Wamo" description="Track live prices across crypto, stocks, forex and commodities on Wamo.">
+<x-layout title="Markets — Fintriva" description="Track live prices across crypto, stocks, forex and commodities on Fintriva.">
 
     <x-page-hero
         eyebrow="Markets"

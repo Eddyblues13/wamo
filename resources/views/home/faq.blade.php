@@ -6,11 +6,11 @@
         <div class="mt-12 space-y-3">
             @php
                 $faqs = [
-                    ['Is my money safe with Wamo?', 'Yes. Assets are held in insured, cold-storage custody with 256-bit encryption, and eligible balances are protected up to $250,000. We never lend out your funds without explicit consent.'],
+                    ['Is my money safe with Fintriva?', 'Yes. Assets are held in insured, cold-storage custody with 256-bit encryption, and eligible balances are protected up to $250,000. We never lend out your funds without explicit consent.'],
                     ['How much do I need to start?', 'There is no minimum. You can buy fractional shares of Tesla, Amazon and others — or crypto — from as little as $1, commission-free.'],
                     ['What can I invest in?', 'Crypto (200+ assets), global stocks like Tesla and Amazon, forex (60+ pairs), commodities such as gold, real estate and expert-managed funds — all from one account.'],
                     ['How fast are deposits and withdrawals?', 'Card and crypto deposits are instant. Bank withdrawals typically settle in seconds to a few minutes, 24/7.'],
-                    ['Does Wamo charge fees?', 'A simple flat 0.1% trading fee with no hidden spreads, deposit fees or inactivity charges.'],
+                    ['Does Fintriva charge fees?', 'A simple flat 0.1% trading fee with no hidden spreads, deposit fees or inactivity charges.'],
                 ];
             @endphp
             @foreach ($faqs as [$q, $a])

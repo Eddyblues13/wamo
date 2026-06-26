@@ -5,7 +5,7 @@
         <div class="reveal">
             <p class="text-sm font-semibold uppercase tracking-widest text-brand-bright">Mobile platform</p>
             <h2 class="mt-3 text-4xl font-black tracking-tight sm:text-5xl">Your portfolio, wherever you are</h2>
-            <p class="mt-4 text-lg text-white/60">Markets operate around the clock — and so does Wamo. Monitor positions, execute trades and configure intelligent price alerts from any device, anywhere in the world.</p>
+            <p class="mt-4 text-lg text-white/60">Markets operate around the clock — and so does Fintriva. Monitor positions, execute trades and configure intelligent price alerts from any device, anywhere in the world.</p>
 
             <ul class="mt-8 space-y-4">
                 @foreach (['Real-time alerts and price triggers', 'One-tap trading and recurring investments', 'Biometric authentication and insured custody', 'Consolidated portfolio tracking across every asset'] as $feature)
@@ -49,7 +49,7 @@
                         <div class="aspect-[9/19] w-full bg-gradient-to-br from-brand/40 via-violet/30 to-emerald/30">
                             <img
                                 src="https://images.unsplash.com/photo-1640340434855-6084b1f4901c?auto=format&fit=crop&w=700&q=80"
-                                alt="Wamo trading app with live crypto and stock charts"
+                                alt="Fintriva trading app with live crypto and stock charts"
                                 loading="lazy"
                                 referrerpolicy="no-referrer"
                                 onerror="this.style.display='none'"

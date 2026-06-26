@@ -1,4 +1,4 @@
-<x-app-layout title="Withdraw — Wamo">
+<x-app-layout title="Withdraw — Fintriva">
 
     <div class="reveal">
         <h1 class="text-2xl font-black tracking-tight sm:text-3xl">Withdraw funds</h1>
